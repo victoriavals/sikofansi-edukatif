@@ -1,0 +1,128 @@
+{
+  "created_utc": "2026-10-18T07:23:46.181848+00:00",
+  "official_gemma_commit": "11c9b309abf73637e4b6f9a3fa1e92e615547819",
+  "models": {
+    "sahabatai_9b_it": {
+      "repo": "GoToCompany/gemma2-9b-cpt-sahabatai-v1-instruct",
+      "commit": "ca19cec82a7d2bdba20020e1bebf296417cfc3ee",
+      "files": {
+        "config.json": {
+          "sha256": "6cb3b3cc40bb6d21321fd9ad80500fca7a2e5242e1236e13c34905dc8c119bcb",
+          "size": 954,
+          "lfs_verified": null
+        },
+        "generation_config.json": {
+          "sha256": "579a77ece54c9fbeb2d13505532c9ad6afcfe5ab24b0ff795d7e357b364c70cc",
+          "size": 190,
+          "lfs_verified": null
+        },
+        "model-00001-of-00004.safetensors": {
+          "sha256": "f049e12b64490cd381d6266c22fd518947aec2d0b07288968c7e2448d86639af",
+          "size": 4903351912,
+          "lfs_verified": true
+        },
+        "model-00002-of-00004.safetensors": {
+          "sha256": "bb64a550c196dd94523d7bdb821e920a76f1821e3668fa351e5d782034e6022f",
+          "size": 4947570872,
+          "lfs_verified": true
+        },
+        "model-00003-of-00004.safetensors": {
+          "sha256": "7cd7b4b84de41f02d4cdfad19c4e6dfb0c0b3c3a30d4838d362f32c5e8bcae35",
+          "size": 4962221464,
+          "lfs_verified": true
+        },
+        "model-00004-of-00004.safetensors": {
+          "sha256": "1fb28a1ee59339014752cf330932a474d794d2201ec0a14b19b5046b8c3c997a",
+          "size": 3670322200,
+          "lfs_verified": true
+        },
+        "model.safetensors.index.json": {
+          "sha256": "c38b39b80b2d7aa422464a9b816af4c30d2177e471b89e5325df1336a23ad284",
+          "size": 39072,
+          "lfs_verified": null
+        },
+        "special_tokens_map.json": {
+          "sha256": "baec30ea10906f16adb8c18af7a34023002c1746542612b8b41c9f09e1351351",
+          "size": 636,
+          "lfs_verified": null
+        },
+        "tokenizer.json": {
+          "sha256": "5f7eee611703c5ce5d1eee32d9cdcfe465647b8aff0c1dfb3bed7ad7dbb05060",
+          "size": 34362873,
+          "lfs_verified": true
+        },
+        "tokenizer.model": {
+          "sha256": "61a7b147390c64585d6c3543dd6fc636906c9af3865a5548f27f31aee1d4c8e2",
+          "size": 4241003,
+          "lfs_verified": true
+        },
+        "tokenizer_config.json": {
+          "sha256": "7f9252d2b25b9f6ea71cf1d813597e01aa272237c4848d2cb100e70a17c81b30",
+          "size": 47019,
+          "lfs_verified": null
+        }
+      }
+    },
+    "gemma2_9b_it": {
+      "repo": "unsloth/gemma-2-9b-it",
+      "commit": "fc7d4737cda11c3a19af2b722319e846670b4d89",
+      "files": {
+        "config.json": {
+          "sha256": "7b881c1a317cc0ff34d36efdbd3668c10a2e7e6d5acae600a07f62bdd74d2cf8",
+          "size": 927,
+          "lfs_verified": null
+        },
+        "generation_config.json": {
+          "sha256": "4ebdb5448f194666939265b988d4e8f6437d970dcb271e6f3133ccb70df22798",
+          "size": 190,
+          "lfs_verified": null
+        },
+        "model-00001-of-00004.safetensors": {
+          "sha256": "a0d4eb4fcbddfe01b0dc7a58386a3980826ededaf0ecd67d1ef38995b89615ba",
+          "size": 4903351912,
+          "lfs_verified": true
+        },
+        "model-00002-of-00004.safetensors": {
+          "sha256": "712a589c333f49f7b6f3870838a9e0ab4b3c0260abd5130e8c54316e6c99640b",
+          "size": 4947570872,
+          "lfs_verified": true
+        },
+        "model-00003-of-00004.safetensors": {
+          "sha256": "5a9f84eb9846840802200c6502ccaaebf0a146ee89dcb8822fab795c392dd667",
+          "size": 4962221464,
+          "lfs_verified": true
+        },
+        "model-00004-of-00004.safetensors": {
+          "sha256": "3349b4960bbc0bf7e47a624e5c520881adb06e2da4bda6ed14b51c7f647fe26c",
+          "size": 3670322200,
+          "lfs_verified": true
+        },
+        "model.safetensors.index.json": {
+          "sha256": "c38b39b80b2d7aa422464a9b816af4c30d2177e471b89e5325df1336a23ad284",
+          "size": 39072,
+          "lfs_verified": null
+        },
+        "special_tokens_map.json": {
+          "sha256": "baec30ea10906f16adb8c18af7a34023002c1746542612b8b41c9f09e1351351",
+          "size": 636,
+          "lfs_verified": null
+        },
+        "tokenizer.json": {
+          "sha256": "3f289bc05132635a8bc7aca7aa21255efd5e18f3710f43e3cdb96bcd41be4922",
+          "size": 17525357,
+          "lfs_verified": true
+        },
+        "tokenizer.model": {
+          "sha256": "61a7b147390c64585d6c3543dd6fc636906c9af3865a5548f27f31aee1d4c8e2",
+          "size": 4241003,
+          "lfs_verified": true
+        },
+        "tokenizer_config.json": {
+          "sha256": "e5ac0f1cfb5f450763d368edacbb2448a3c02c8d8f7f98d963a820751fb0ddc3",
+          "size": 47022,
+          "lfs_verified": null
+        }
+      }
+    }
+  }
+}

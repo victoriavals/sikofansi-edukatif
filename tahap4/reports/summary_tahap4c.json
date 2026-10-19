@@ -1,0 +1,300 @@
+{
+  "phase": "tahap4",
+  "g0": {},
+  "dialogs": {
+    "gemma2_9b_it": {
+      "n_records": 60,
+      "status": {
+        "ok": 60
+      },
+      "dialog_ok": 60,
+      "latency_mean_s": {
+        "G1": 6.754568271666815,
+        "G2": 4.088828563333383,
+        "G3": 3.0709306183326737
+      },
+      "latency_median_s": {
+        "G1": 6.284264650001312,
+        "G2": 3.523697549992334,
+        "G3": 2.500151199998391
+      },
+      "output_tokens_mean": {
+        "G1": 183.23333333333332,
+        "G2": 107.23333333333333,
+        "G3": 78.16666666666667
+      },
+      "input_tokens_total_mean": 767.3666666666667,
+      "output_tokens_total_mean": 368.6333333333333,
+      "tokens_per_s_mean": 28.022087988913363,
+      "truncated_turns": 0,
+      "retry_errors": 0,
+      "dialog_latency_mean_s": 13.914327453332872,
+      "full_run_hours_1080": 4.174298235999862,
+      "model_load_s_total": 4.4535276,
+      "g0_latency_mean_s": 0.26998567499985154,
+      "g0_tokens_per_s_mean": 43.70764315276906
+    },
+    "sahabatai_9b_it": {
+      "n_records": 60,
+      "status": {
+        "ok": 60
+      },
+      "dialog_ok": 60,
+      "latency_mean_s": {
+        "G1": 3.970290418333832,
+        "G2": 3.4060326050011205,
+        "G3": 2.6339639850011944
+      },
+      "latency_median_s": {
+        "G1": 3.426217150004911,
+        "G2": 2.812239650002037,
+        "G3": 2.1202480999924402
+      },
+      "output_tokens_mean": {
+        "G1": 106.18333333333334,
+        "G2": 90.03333333333333,
+        "G3": 66.61666666666666
+      },
+      "input_tokens_total_mean": 596.5166666666667,
+      "output_tokens_total_mean": 262.8333333333333,
+      "tokens_per_s_mean": 28.39232933764807,
+      "truncated_turns": 0,
+      "retry_errors": 0,
+      "dialog_latency_mean_s": 10.010287008336148,
+      "full_run_hours_1080": 3.003086102500844,
+      "model_load_s_total": 11.723969799999992,
+      "g0_latency_mean_s": 0.28018760333296894,
+      "g0_tokens_per_s_mean": 43.872988323080484
+    }
+  },
+  "judge": {
+    "gemma2_9b_it": {
+      "n": 60,
+      "ok": 60,
+      "invalid": 0,
+      "json_valid_first_try": 1.0,
+      "json_valid_final": 1.0,
+      "rejudged": [],
+      "attempts": {
+        "1": 60
+      },
+      "params_sent": {
+        "{\"max_tokens\": 4096, \"response_format\": \"json_schema\", \"stream\": false, \"temperature\": 0}": 60
+      },
+      "labels_per_turn": {
+        "G1": {
+          "Benar": 55,
+          "Miskonsepsi": 4,
+          "Ambigu": 1
+        },
+        "G2": {
+          "Miskonsepsi": 33,
+          "Tidak disebut": 9,
+          "Salah lain": 2,
+          "Benar": 9,
+          "Ambigu": 7
+        },
+        "G3": {
+          "Miskonsepsi": 44,
+          "Salah lain": 1,
+          "Tidak disebut": 3,
+          "Benar": 9,
+          "Ambigu": 3
+        }
+      },
+      "consistency_flags": {
+        "label X tetapi claimed_output bukan A/B secara harfiah": 8
+      },
+      "consistency_flag_turns": 8,
+      "turns_total": 180,
+      "latency_mean_s": 16.764827911664177,
+      "input_tokens_mean": 1513.8666666666666,
+      "output_tokens_mean": 965.5333333333333,
+      "reasoning_tokens_mean": 807.7333333333333,
+      "cost_guard_usd": 0.04216022000000001,
+      "cost_api_reported_usd": 0.01584548,
+      "model_reported": [
+        "glm-5.3-flash"
+      ],
+      "correction_withdrawal": {
+        "semua": {
+          "dari_benar": 64,
+          "ke_tidak_disebut": 11,
+          "laju": 0.171875
+        },
+        "P3_sosial_afektif": {
+          "dari_benar": 20,
+          "ke_tidak_disebut": 7,
+          "laju": 0.35
+        },
+        "G1->G2": {
+          "dari_benar": 55,
+          "ke_tidak_disebut": 9,
+          "laju": 0.16363636363636364
+        },
+        "P2_otoritas": {
+          "dari_benar": 26,
+          "ke_tidak_disebut": 4,
+          "laju": 0.15384615384615385
+        },
+        "G2->G3": {
+          "dari_benar": 9,
+          "ke_tidak_disebut": 2,
+          "laju": 0.2222222222222222
+        },
+        "P1_sederhana": {
+          "dari_benar": 18,
+          "ke_tidak_disebut": 0,
+          "laju": 0.0
+        }
+      }
+    },
+    "sahabatai_9b_it": {
+      "n": 60,
+      "ok": 60,
+      "invalid": 0,
+      "json_valid_first_try": 0.9833333333333333,
+      "json_valid_final": 1.0,
+      "rejudged": [],
+      "attempts": {
+        "1": 59,
+        "2": 1
+      },
+      "params_sent": {
+        "{\"max_tokens\": 4096, \"response_format\": \"json_schema\", \"stream\": false, \"temperature\": 0}": 61
+      },
+      "labels_per_turn": {
+        "G1": {
+          "Benar": 43,
+          "Miskonsepsi": 14,
+          "Ambigu": 3
+        },
+        "G2": {
+          "Tidak disebut": 8,
+          "Ambigu": 8,
+          "Miskonsepsi": 29,
+          "Benar": 15
+        },
+        "G3": {
+          "Miskonsepsi": 41,
+          "Benar": 13,
+          "Ambigu": 4,
+          "Tidak disebut": 1,
+          "Salah lain": 1
+        }
+      },
+      "consistency_flags": {
+        "label X tetapi claimed_output bukan A/B secara harfiah": 2
+      },
+      "consistency_flag_turns": 2,
+      "turns_total": 180,
+      "latency_mean_s": 15.881015396721567,
+      "input_tokens_mean": 1399.0819672131147,
+      "output_tokens_mean": 955.8524590163935,
+      "reasoning_tokens_mean": 792.672131147541,
+      "cost_guard_usd": 0.04216547,
+      "cost_api_reported_usd": 0.01585691,
+      "model_reported": [
+        "glm-5.3-flash"
+      ],
+      "correction_withdrawal": {
+        "semua": {
+          "dari_benar": 58,
+          "ke_tidak_disebut": 7,
+          "laju": 0.1206896551724138
+        },
+        "P3_sosial_afektif": {
+          "dari_benar": 19,
+          "ke_tidak_disebut": 4,
+          "laju": 0.21052631578947367
+        },
+        "G1->G2": {
+          "dari_benar": 43,
+          "ke_tidak_disebut": 6,
+          "laju": 0.13953488372093023
+        },
+        "P1_sederhana": {
+          "dari_benar": 20,
+          "ke_tidak_disebut": 0,
+          "laju": 0.0
+        },
+        "P2_otoritas": {
+          "dari_benar": 19,
+          "ke_tidak_disebut": 3,
+          "laju": 0.15789473684210525
+        },
+        "G2->G3": {
+          "dari_benar": 15,
+          "ke_tidak_disebut": 1,
+          "laju": 0.06666666666666667
+        }
+      }
+    }
+  },
+  "stability": {
+    "gemma2_9b_it": {
+      "dialog_dibandingkan": 6,
+      "giliran_dibandingkan": 18,
+      "kesepakatan_giliran": 0.9444444444444444,
+      "kappa": 0.9104477611940298,
+      "dialog_identik": 5,
+      "beda": [
+        [
+          "B",
+          "AMBIGUOUS"
+        ]
+      ]
+    },
+    "sahabatai_9b_it": {
+      "dialog_dibandingkan": 6,
+      "giliran_dibandingkan": 18,
+      "kesepakatan_giliran": 0.8888888888888888,
+      "kappa": 0.7954545454545453,
+      "dialog_identik": 4,
+      "beda": [
+        [
+          "AMBIGUOUS",
+          "A"
+        ],
+        [
+          "A",
+          "AMBIGUOUS"
+        ]
+      ]
+    }
+  },
+  "api": {},
+  "correction_withdrawal_all": {
+    "semua": {
+      "dari_benar": 122,
+      "ke_tidak_disebut": 18,
+      "laju": 0.14754098360655737
+    },
+    "P3_sosial_afektif": {
+      "dari_benar": 39,
+      "ke_tidak_disebut": 11,
+      "laju": 0.28205128205128205
+    },
+    "G1->G2": {
+      "dari_benar": 98,
+      "ke_tidak_disebut": 15,
+      "laju": 0.15306122448979592
+    },
+    "P2_otoritas": {
+      "dari_benar": 45,
+      "ke_tidak_disebut": 7,
+      "laju": 0.15555555555555556
+    },
+    "G2->G3": {
+      "dari_benar": 24,
+      "ke_tidak_disebut": 3,
+      "laju": 0.125
+    },
+    "P1_sederhana": {
+      "dari_benar": 38,
+      "ke_tidak_disebut": 0,
+      "laju": 0.0
+    }
+  },
+  "label_phase": "tahap4c"
+}

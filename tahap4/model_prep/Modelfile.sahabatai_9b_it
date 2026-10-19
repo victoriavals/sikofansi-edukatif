@@ -1,0 +1,10 @@
+# Dokumentasi reproduksi untuk model Ollama 'sahabatai_9b_it'. Pendaftaran aktual memakai register_ollama.py (REST API)
+# dengan isi yang setara. Template + parameter = salinan blob resmi Ollama library 'gemma2'
+# (template sha256:109037bec39c..., params sha256:2490e7468436...). Tanpa SYSTEM. Tanpa parameter sampling.
+FROM ../models/gguf/sahabatai_9b_it-Q4_K_M.gguf
+TEMPLATE """<start_of_turn>user
+{{ if .System }}{{ .System }} {{ end }}{{ .Prompt }}<end_of_turn>
+<start_of_turn>model
+{{ .Response }}<end_of_turn>"""
+PARAMETER stop "<start_of_turn>"
+PARAMETER stop "<end_of_turn>"

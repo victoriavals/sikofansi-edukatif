@@ -1,0 +1,125 @@
+# Konfigurasi pipeline. config.yaml adalah salinan aktif; kunci API TIDAK pernah ditulis di sini.
+# Kunci API TIDAK ditulis di sini: yang dicatat hanya nama variabel lingkungannya (api_key_env),
+# dan nilainya dibaca dari tahap4/.env.
+#
+# provider: ollama | openai | google | anthropic | openai_compatible
+# family  : keluarga model; dipakai untuk memastikan penilai berbeda keluarga dari model yang diuji.
+
+paths:                       # relatif terhadap folder tahap4/
+  dialogs_plan: ../tahap3/dialogs_plan.jsonl
+  g0_plan: ../tahap3/g0_plan.jsonl
+  items: ../tahap2/items.json
+  judge_prompt: ../tahap3/judge_prompt.md
+  judge_schema: ../tahap3/judge_schema.json
+  runs_dir: runs/raw
+  dev_dir: runs/dev
+  labels_dir: labels
+  reports_dir: reports
+
+# Batas total biaya API (semua run + penilai, dihitung dari log dengan harga normal, input tanpa diskon cache = batas atas).
+# Keputusan peneliti 2026-10-18 (Tahap 4B): batas 12 USD; BERHENTI dan laporkan bila biaya kumulatif melewati 8 USD.
+budget_usd_limit: 12.0
+budget_alert_usd: 8.0
+max_tokens: 1024             # batas token keluaran model yang diuji
+
+cost_estimate:               # dipakai untuk estimasi sebelum run (bukan untuk tagihan)
+  output_tokens_per_turn: 400
+  chars_per_token: 3.5
+
+retry:
+  max_attempts: 6
+  base_delay_s: 2.0
+  max_delay_s: 120.0
+  timeout_s: 600
+
+ollama:
+  # num_gpu 36 = jumlah layer di GPU dikunci (keputusan peneliti 2026-10-18: KV f16, offload parsial 36/43)
+  # agar pembagian CPU/GPU identik di setiap run. seed ditambahkan per dialog: int(sha256(id)) mod 2^31
+  options: {num_ctx: 4096, num_predict: 1024, num_gpu: 36}
+  keep_alive: 30m
+
+models:
+  gemma2_9b_it:
+    provider: ollama
+    family: gemma
+    model_id: gemma2_9b_it
+    base_url: http://127.0.0.1:11435   # instans riset khusus (model_prep/research_ollama.sh)
+    price_input_per_mtok: 0
+    price_output_per_mtok: 0
+  sahabatai_9b_it:
+    provider: ollama
+    family: gemma
+    model_id: sahabatai_9b_it
+    base_url: http://127.0.0.1:11435   # instans riset khusus (model_prep/research_ollama.sh)
+    price_input_per_mtok: 0
+    price_output_per_mtok: 0
+  # Model API lewat agregator SumoPod (OpenAI-compatible), satu kunci SumoPod per slot (keputusan peneliti 2026-10-18).
+  # Harga per 1 juta token diambil MANUAL dari dashboard SumoPod pada 2026-10-18 (tidak tersedia lewat API).
+  # Pengaman anggaran memakai harga normal; diskon dan harga cache hanya dicatat untuk laporan.
+  komersial_A:
+    provider: openai_compatible
+    family: openai
+    model_id: gpt-6-luna
+    base_url: https://ai.sumopod.com/v1
+    api_key_env: KOMERSIAL_A_API_KEY
+    price_input_per_mtok: 0.10
+    price_cache_input_per_mtok: 0.01
+    price_output_per_mtok: 0.50
+    price_source: "manual, dashboard SumoPod, 2026-10-18"
+    # hanya untuk estimasi biaya; diukur dari uji asap 2026-10-18 (1 dialog A08 + 1 G0; varians besar)
+    est_output_tokens_per_turn: 138    # ditagih per giliran, termasuk penalaran (415/3)
+    est_history_tokens_per_turn: 91    # jawaban terlihat yang masuk riwayat ((415-141)/3)
+    est_g0_output_tokens: 26
+  komersial_B:
+    provider: openai_compatible
+    family: deepseek
+    model_id: deepseek-v4-flash-0731:netra   # varian ':netra' (arti tidak terdokumentasi resmi; lihat REPORT_TAHAP4B.md)
+    base_url: https://ai.sumopod.com/v1
+    api_key_env: KOMERSIAL_B_API_KEY
+    price_input_per_mtok: 0.25
+    price_cache_input_per_mtok: 0.05            # normal; diskon saat ini 0.03 (tidak dipakai untuk pengaman)
+    price_output_per_mtok: 0.50
+    price_source: "manual, dashboard SumoPod, 2026-10-18"
+    # Referensi (bukan slot ini): deepseek-v4-flash non-netra peak 0.30/1.20, off-peak 0.15/0.60, cache 0.006/0.003.
+    # hanya untuk estimasi biaya; diukur dari uji asap 2026-10-18 (1 dialog E02 + 1 G0; varians besar).
+    # Catatan: di Netra, max_tokens 1024 tidak membatasi token penalaran (G2 = 2.558 token keluaran).
+    est_output_tokens_per_turn: 1398   # ditagih per giliran, termasuk penalaran (4194/3)
+    est_history_tokens_per_turn: 442   # jawaban terlihat yang masuk riwayat ((4194-2867)/3)
+    est_g0_output_tokens: 102
+
+judge:
+  provider: openai_compatible
+  family: zhipu              # berbeda dari gemma (Google), openai, deepseek
+  model_id: glm-5.3-flash
+  base_url: https://ai.sumopod.com/v1
+  api_key_env: JUDGE_API_KEY
+  price_input_per_mtok: 0.03          # harga NORMAL; diskon 50% saat ini (0.015/0.015/0.25) tidak dipakai untuk pengaman
+  price_cache_input_per_mtok: 0.03
+  price_output_per_mtok: 0.50
+  price_source: "manual, dashboard SumoPod, 2026-10-18"
+  temperature: 0
+  temperature_fallback: true   # bila API menolak temperature: pakai default penyedia dan catat
+  json_mode_fallback: true     # bila json_schema tidak didukung: mode JSON + validasi skema
+  max_tokens: 4096             # keputusan peneliti 2026-10-18: 1024 habis untuk penalaran pada 35% panggilan pilot
+  candidate_order_seed: 20261018
+  max_json_attempts: 3
+  stability_frac: 0.10         # uji stabilitas: nilai ulang 10% dialog acak per slot
+  stability_seed: 20261019
+
+dev_models:                  # HANYA untuk uji asap pipeline. Log ke runs/dev/, BUKAN data penelitian.
+  gemma3_4b_dev:
+    provider: ollama
+    family: gemma
+    model_id: gemma3:4b
+    base_url: http://localhost:11434
+    price_input_per_mtok: 0
+    price_output_per_mtok: 0
+    keep_alive: -1           # gemma3:4b milik pengguna dimuat "Forever"; jangan diubah oleh uji asap
+  gemma3_4b_dev_openai_compat:   # uji jalur adapter OpenAI SDK lewat endpoint kompatibel OpenAI milik Ollama
+    provider: openai_compatible
+    family: gemma
+    model_id: gemma3:4b
+    base_url: http://localhost:11434/v1
+    api_key_env: null
+    price_input_per_mtok: 0
+    price_output_per_mtok: 0

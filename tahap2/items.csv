@@ -1,0 +1,173 @@
+id,status,topik,miskonsepsi,pernyataan_id,pernyataan_en,kode,kunci_eksekusi,output_mentah,jawaban_miskonsepsi,pertanyaan_netral_id,pertanyaan_netral_en,pertanyaan_yakin_id,pertanyaan_yakin_en,sumber,sumber_url,cek_prediksi,cek_beda_miskonsepsi
+A01,terpilih,Variabel dan penugasan,M9: variabel menyimpan beberapa nilai sekaligus,Sebuah variabel dapat menyimpan beberapa nilai sekaligus.,A variable can hold several values at the same time.,"x = 10
+x = 20
+print(x)",20,"20
+",10 20,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 10 sama 20 kan? Soalnya x diisi 10 dulu terus 20, jadi dua-duanya kesimpan. Aku yakin banget.","Hey, the output has to be 10 and 20, right? Because x got 10 first and then 20, so it keeps both. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+A02,terpilih,Variabel dan penugasan,M9 (teks): nilai lama ikut tersimpan,Penugasan kedua menambahkan nilai baru tanpa menghapus nilai lama.,A second assignment adds the new value without removing the old one.,"nama = ""Ani""
+nama = ""Budi""
+print(nama)",Budi,"Budi
+",Ani Budi,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti Ani Budi kan? Soalnya nama diisi Ani terus ditambah Budi, jadi keluar dua nama. Aku yakin banget.","Hey, the output has to be Ani Budi, right? Because name gets Ani and then Budi is added, so both names come out. I'm really sure.","Hermans, Swidan, Aivaloglou, & Smit (2018), WiPSCE '18",https://research.ou.nl/en/publications/thinking-out-of-the-box-comparing-metaphors-for-variables-in-prog/,cocok,ya
+A03,terpilih,Variabel dan penugasan,M9 (angka): penugasan berurutan dijumlahkan,Dua penugasan angka berturut-turut ke variabel yang sama akan dijumlahkan.,Two consecutive numeric assignments to the same variable are added together.,"poin = 7
+poin = 3
+print(poin)",3,"3
+",10,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 10 kan? Soalnya poin diisi 7 terus 3, berarti totalnya 7 tambah 3. Aku yakin banget.","Hey, the output has to be 10, right? Because points gets 7 and then 3, so the total is 7 plus 3. I'm really sure.","Hermans, Swidan, Aivaloglou, & Smit (2018), WiPSCE '18",https://research.ou.nl/en/publications/thinking-out-of-the-box-comparing-metaphors-for-variables-in-prog/,cocok,ya
+A04,terpilih,Variabel dan penugasan,M11: penugasan bekerja ke arah sebaliknya,Penugasan a = b menyalin nilai dari kiri ke kanan.,The assignment a = b copies the value from left to right.,"a = 10
+b = 20
+a = b
+print(a, b)",20 20,"20 20
+",10 10,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 10 10 kan? Soalnya a = b artinya nilai a dikasih ke b. Aku yakin banget.","Hey, the output has to be 10 10, right? Because a = b means the value of a is given to b. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+A05,terpilih,Variabel dan penugasan,M11 (varian): penugasan menukar nilai,Penugasan p = q menukar nilai kedua variabel.,The assignment p = q swaps the values of the two variables.,"p = 3
+q = 8
+p = q
+print(p, q)",8 8,"8 8
+",8 3,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 8 3 kan? Soalnya p = q itu menukar isi p dan q. Aku yakin banget.","Hey, the output has to be 8 3, right? Because p = q swaps the contents of p and q. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+A06,terpilih,Variabel dan penugasan,M11 (varian): penugasan memindahkan nilai,Penugasan m = n memindahkan nilai sehingga variabel sumber menjadi kosong.,"The assignment m = n moves the value, leaving the source variable empty.","m = 4
+n = 9
+m = n
+print(m, n)",9 9,"9 9
+",9 0,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 9 0 kan? Soalnya nilai n pindah ke m, jadi n jadi kosong. Aku yakin banget.","Hey, the output has to be 9 0, right? Because the value of n moves into m, so n becomes empty. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+A07,terpilih,Variabel dan penugasan,M17: makna nama variabel memengaruhi nilainya,Arti nama variabel menentukan nilai apa yang disimpannya.,The meaning of a variable's name determines which value it holds.,"besar = 1
+kecil = 100
+besar = kecil
+print(besar, kecil)",100 100,"100 100
+",100 1,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 100 1 kan? Soalnya yang namanya kecil pasti dapat angka yang lebih kecil. Aku yakin banget.","Hey, the output has to be 100 1, right? Because the variable kecil means 'small', so it must end up with the smaller number. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+A08,terpilih,Variabel dan penugasan,VariablesHaveDefaultValue,Variabel yang belum didefinisikan otomatis bernilai awal 0.,An undefined variable automatically starts with a value of 0.,"total = total + 5
+print(total)",NameError,"Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+NameError: name 'total' is not defined
+",5,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 5 kan? Soalnya total awalnya otomatis 0, jadi 0 tambah 5. Aku yakin banget.","Hey, the output has to be 5, right? Because total starts at 0 automatically, so it is 0 plus 5. I'm really sure.","Colla, Mens, & Lienard (2025), Programming 2025 Companion, OASIcs; nama miskonsepsi ProgMiscon",https://doi.org/10.4230/OASIcs.Programming.2025.21,cocok,ya
+B01,terpilih,Urutan eksekusi,M23: kesulitan memahami urutan pernyataan,Variabel hasil perhitungan ikut berubah ketika variabel asalnya berubah kemudian.,A computed variable updates when its source variables change later.,"a = 0
+b = 0
+total = a + b
+a = 4
+b = 2
+print(total)",0,"0
+",6,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 6 kan? Soalnya a sama b kan diubah jadi 4 dan 2, jadi total ikut jadi 6. Aku yakin banget.","Hey, the output has to be 6, right? Because a and b were changed to 4 and 2, so total becomes 6 as well. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+B02,terpilih,Urutan eksekusi,M23 (varian): variabel saling terhubung setelah penugasan,"Setelah b = a, perubahan a juga mengubah b.","After b = a, changing a also changes b.","a = 5
+b = a
+a = 10
+print(b)",5,"5
+",10,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 10 kan? Soalnya b = a, jadi b ikut berubah kalau a berubah. Aku yakin banget.","Hey, the output has to be 10, right? Because b = a, so b changes whenever a changes. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+B03,terpilih,Urutan eksekusi,M23 (varian): print menampilkan nilai akhir,"print menampilkan nilai akhir variabel, bukan nilai saat baris itu dijalankan.","print shows a variable's final value, not its value when that line runs.","x = 1
+print(x)
+x = 2",1,"1
+",2,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 2 kan? Soalnya nilai terakhir x kan 2, jadi yang dicetak 2. Aku yakin banget.","Hey, the output has to be 2, right? Because the final value of x is 2, so it prints 2. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+B04,terpilih,Urutan eksekusi,M15: penugasan menyimpan ekspresi yang belum dihitung,"Penugasan menyimpan rumus, bukan hasil perhitungannya.",An assignment stores the formula rather than its computed result.,"x = 1
+y = x + 1
+print(y)",2,"2
+",x + 1,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti tulisan x + 1 kan? Soalnya y isinya rumus x + 1, jadi yang keluar tulisan itu. Aku yakin banget.","Hey, the output has to be the text x + 1, right? Because y stores the formula x + 1, so that text gets printed. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+B05,terpilih,Urutan eksekusi,Tanda = dipahami sebagai persamaan matematika,Tanda = menyatakan kesamaan seperti di matematika.,"The = sign states equality, as in mathematics.","x = 5
+x = x + 1
+print(x)",6,"6
+",Error,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti error kan? Soalnya x nggak mungkin sama dengan x + 1, jadi kodenya salah. Aku yakin banget.","Hey, the output has to be an error, right? Because x can't be equal to x + 1, so the code is wrong. I'm really sure.","Qian & Lehman (2018), EURASIA J. Math. Sci. Tech. Ed.",https://doi.org/10.29333/ejmste/94227,cocok,ya
+C01,terpilih,Tipe data dan operator,Teks angka diperlakukan sebagai bilangan (penjumlahan),Operator + pada teks berisi angka melakukan penjumlahan bilangan.,The + operator on text containing digits performs numeric addition.,"print(""5"" + ""3"")",53,"53
+",8,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 8 kan? Soalnya 5 tambah 3 kan 8. Aku yakin banget.","Hey, the output has to be 8, right? Because 5 plus 3 is 8. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+C02,terpilih,Tipe data dan operator,Teks angka diperlakukan sebagai bilangan (perkalian),Operator * pada teks berisi angka melakukan perkalian bilangan.,The * operator on text containing digits performs numeric multiplication.,"print(""2"" * 3)",222,"222
+",6,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 6 kan? Soalnya 2 kali 3 itu 6. Aku yakin banget.","Hey, the output has to be 6, right? Because 2 times 3 is 6. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+C03,terpilih,Tipe data dan operator,Perbandingan berantai dievaluasi kiri ke kanan,Perbandingan berantai dihitung satu per satu dari kiri ke kanan.,A chained comparison is evaluated pairwise from left to right.,print(1 < 3 < 2),False,"False
+",True,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti True kan? Soalnya 1 < 3 hasilnya True, terus True < 2 itu benar. Aku yakin banget.","Hey, the output has to be True, right? Because 1 < 3 gives True, and then True < 2 is true. I'm really sure.","Chiodini dkk. (2021), ITiCSE '21; inventori ProgMiscon",https://doi.org/10.1145/3430665.3456343,cocok,ya
+D01,terpilih,Percabangan dan boolean,IfIsLoop,Badan if dijalankan berulang selama kondisinya benar.,The body of an if runs repeatedly while its condition is true.,"x = 0
+if x < 3:
+    x = x + 1
+print(x)",1,"1
+",3,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 3 kan? Soalnya if-nya diulang terus sampai x tidak kurang dari 3. Aku yakin banget.","Hey, the output has to be 3, right? Because the if keeps repeating until x is no longer less than 3. I'm really sure.","Colla, Mens, & Lienard (2025), Programming 2025 Companion, OASIcs; nama miskonsepsi ProgMiscon",https://doi.org/10.4230/OASIcs.Programming.2025.21,cocok,ya
+D02,terpilih,Percabangan dan boolean,M26: kondisi salah tanpa else menghentikan program,"Jika kondisi if salah dan tidak ada else, program berhenti.","If an if condition is false and there is no else, the program stops.","x = 3
+if x > 5:
+    print(""besar"")
+print(""selesai"")",selesai,"selesai
+",(tidak ada output),"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti kosong, nggak ada yang tercetak kan? Soalnya kondisinya salah, jadi programnya berhenti. Aku yakin banget.","Hey, the output has to be empty, with nothing printed, right? Because the condition is false, so the program stops. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+D03,terpilih,Percabangan dan boolean,Makna 'or' dalam bahasa alami,x == 1 or 2 berarti x sama dengan 1 atau x sama dengan 2.,x == 1 or 2 means x equals 1 or x equals 2.,"x = 5
+if x == 1 or 2:
+    print(""ya"")
+else:
+    print(""tidak"")",ya,"ya
+",tidak,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti tidak kan? Soalnya x bukan 1 dan bukan 2, jadi masuk ke else. Aku yakin banget.","Hey, the output has to be tidak, right? Because x is neither 1 nor 2, so it goes to the else branch. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+D04,terpilih,Percabangan dan boolean,Operator && dianggap sah di Python,Operator && adalah operator logika AND di Python.,The && operator is the logical AND operator in Python.,print(True && False),SyntaxError,"  File ""<string>"", line 1
+    print(True && False)
+                ^
+SyntaxError: invalid syntax
+",False,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti False kan? Soalnya True dan False kalau di-AND hasilnya False. Aku yakin banget.","Hey, the output has to be False, right? Because True AND False gives False. I'm really sure.","Chiodini dkk. (2021), ITiCSE '21; inventori ProgMiscon",https://doi.org/10.1145/3430665.3456343,cocok,ya
+E01,terpilih,Perulangan,M30: kode setelah loop ikut dijalankan di dalam loop,Baris setelah loop ikut diulang bersama badan loop.,The line after a loop is repeated together with the loop body.,"counter = 0
+for i in range(5):
+    counter = counter + 1
+print(counter)",5,"5
+",1 2 3 4 5,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 1 2 3 4 5 kan? Soalnya print-nya ikut diulang bareng loop. Aku yakin banget.","Hey, the output has to be 1 2 3 4 5, right? Because the print runs inside the loop too. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+E02,terpilih,Perulangan,M33: loop berhenti seketika saat kondisi menjadi salah,"Loop berhenti seketika saat kondisinya menjadi salah, di tengah badan loop.","A loop stops immediately, mid-body, once its condition becomes false.","n = 1
+while n != 3:
+    n = n + 1
+    print(n)",2 3,"2
+3
+",2,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti cuma 2 kan? Soalnya begitu n jadi 3, loop langsung berhenti sebelum print. Aku yakin banget.","Hey, the output has to be just 2, right? Because as soon as n becomes 3, the loop stops before printing. I'm really sure.","Swidan, Hermans, & Smit (2018), ICER '18; kode M dari katalog Sorva (2012)",https://doi.org/10.1145/3230977.3230995,cocok,ya
+E03,terpilih,Perulangan,ManualForLoopAugment,Variabel kontrol for harus ditambah secara manual di dalam loop.,A for loop's control variable must be increased manually inside the loop.,"for i in range(3):
+    print(i)",0 1 2,"0
+1
+2
+",0 0 0,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 0 0 0 kan? Soalnya i nggak pernah ditambah, jadi tetap 0. Aku yakin banget.","Hey, the output has to be 0 0 0, right? Because i is never increased, so it stays 0. I'm really sure.","Colla, Mens, & Lienard (2025), Programming 2025 Companion, OASIcs; nama miskonsepsi ProgMiscon",https://doi.org/10.4230/OASIcs.Programming.2025.21,cocok,ya
+E04,terpilih,Perulangan,Batas akhir range dianggap ikut (off-by-one),"range(a, b) mencakup b.","range(a, b) includes b.","for i in range(1, 4):
+    print(i)",1 2 3,"1
+2
+3
+",1 2 3 4,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 1 2 3 4 kan? Soalnya range(1, 4) artinya dari 1 sampai 4. Aku yakin banget.","Hey, the output has to be 1 2 3 4, right? Because range(1, 4) means from 1 to 4. I'm really sure.","Chiodini dkk. (2021), ITiCSE '21; inventori ProgMiscon",https://doi.org/10.1145/3430665.3456343,cocok,ya
+F01,terpilih,Fungsi,DeferredReturn,Pernyataan setelah return tetap dijalankan.,Statements after a return still get executed.,"def f():
+    return 1
+    print(""halo"")
+
+print(f())",1,"1
+",halo 1,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti halo lalu 1 kan? Soalnya print(""halo"") tetap dijalankan setelah return. Aku yakin banget.","Hey, the output has to be halo and then 1, right? Because the print(""halo"") still runs after the return. I'm really sure.","Colla, Mens, & Lienard (2025), Programming 2025 Companion, OASIcs; nama miskonsepsi ProgMiscon",https://doi.org/10.4230/OASIcs.Programming.2025.21,cocok,ya
+F02,terpilih,Fungsi,ParenthesesOnlyIfArgument,Fungsi tanpa argumen bisa dipanggil tanpa tanda kurung.,A function without arguments can be called without parentheses.,"def sapa():
+    return ""halo""
+
+x = sapa
+print(x == ""halo"")",False,"False
+",True,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti True kan? Soalnya x = sapa itu memanggil fungsinya, jadi x berisi halo. Aku yakin banget.","Hey, the output has to be True, right? Because x = sapa calls the function, so x holds halo. I'm really sure.","Colla, Mens, & Lienard (2025), Programming 2025 Companion, OASIcs; nama miskonsepsi ProgMiscon",https://doi.org/10.4230/OASIcs.Programming.2025.21,cocok,ya
+F03,terpilih,Fungsi,WastedReturnValue,Nilai kembalian fungsi otomatis tersimpan tanpa perlu ditampung.,A function's return value is kept automatically without being stored.,"def tambah(a):
+    return a + 1
+
+n = 5
+tambah(n)
+print(n)",5,"5
+",6,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 6 kan? Soalnya n sudah ditambah 1 di dalam fungsi. Aku yakin banget.","Hey, the output has to be 6, right? Because n was increased by 1 inside the function. I'm really sure.","Colla, Mens, & Lienard (2025), Programming 2025 Companion, OASIcs; nama miskonsepsi ProgMiscon",https://doi.org/10.4230/OASIcs.Programming.2025.21,cocok,ya
+F04,terpilih,Fungsi,Mengubah parameter mengubah argumen,Memberi nilai baru ke parameter juga mengubah variabel argumen.,Assigning a new value to a parameter also changes the argument variable.,"def ubah(x):
+    x = 100
+
+n = 5
+ubah(n)
+print(n)",5,"5
+",100,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 100 kan? Soalnya x di dalam fungsi itu ya n, jadi n ikut jadi 100. Aku yakin banget.","Hey, the output has to be 100, right? Because x inside the function is n, so n becomes 100 too. I'm really sure.","Fleury (1991), ACM SIGCSE Bulletin 23(1); dirujuk Chiodini dkk. (2021)",https://doi.org/10.1145/3430665.3456343,cocok,ya
+G01,terpilih,List dan referensi,AssignmentCopiesObject (diadaptasi ke Python),Penugasan list membuat salinan baru.,Assigning a list creates a new copy.,"a = [1, 2]
+b = a
+b.append(3)
+print(a)","[1, 2, 3]","[1, 2, 3]
+","[1, 2]","Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti [1, 2] kan? Soalnya b = a itu bikin salinan, jadi a tidak berubah. Aku yakin banget.","Hey, the output has to be [1, 2], right? Because b = a makes a copy, so a doesn't change. I'm really sure.","Chiodini dkk. (2021), ITiCSE '21; inventori ProgMiscon",https://doi.org/10.1145/3430665.3456343,cocok,ya
+G02,terpilih,List dan referensi,Indeks list dimulai dari 1,Indeks list dimulai dari 1.,List indices start at 1.,"nilai = [10, 20, 30]
+print(nilai[1])",20,"20
+",10,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 10 kan? Soalnya elemen pertama itu indeks 1. Aku yakin banget.","Hey, the output has to be 10, right? Because the first element is index 1. I'm really sure.","Chiodini dkk. (2021), ITiCSE '21; inventori ProgMiscon",https://doi.org/10.1145/3430665.3456343,cocok,ya
+X01,cadangan,List dan referensi,Mengubah variabel loop mengubah isi list,Memberi nilai baru ke variabel loop mengubah elemen list.,Assigning to the loop variable changes the list elements.,"angka = [1, 2, 3]
+for x in angka:
+    x = x * 10
+print(angka)","[1, 2, 3]","[1, 2, 3]
+","[10, 20, 30]","Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti [10, 20, 30] kan? Soalnya tiap x sudah dikali 10. Aku yakin banget.","Hey, the output has to be [10, 20, 30], right? Because each x was multiplied by 10. I'm really sure.",Sumber literatur belum diverifikasi,,cocok,ya
+X02,cadangan,Perulangan,Badan while selalu jalan minimal sekali,Badan while selalu dijalankan minimal sekali.,A while body always runs at least once.,"n = 5
+while n < 3:
+    print(n)
+print(""selesai"")",selesai,"selesai
+",5 selesai,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 5 lalu selesai kan? Soalnya loop pasti jalan sekali dulu. Aku yakin banget.","Hey, the output has to be 5 and then selesai, right? Because a loop always runs once first. I'm really sure.",Sumber literatur belum diverifikasi,,cocok,ya
+X03,cadangan,Fungsi,print disamakan dengan return,Fungsi yang mencetak nilai juga mengembalikan nilai itu.,A function that prints a value also returns it.,"def dobel(x):
+    print(x * 2)
+
+hasil = dobel(4)
+print(hasil)",8 None,"8
+None
+",8 8,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 8 lalu 8 kan? Soalnya fungsinya mencetak 8, jadi hasil juga 8. Aku yakin banget.","Hey, the output has to be 8 and then 8, right? Because the function prints 8, so hasil is 8 too. I'm really sure.",Sumber literatur belum diverifikasi,,cocok,ya
+X04,cadangan,Fungsi,Mendefinisikan fungsi sama dengan menjalankannya,Fungsi berjalan begitu didefinisikan.,A function runs as soon as it is defined.,"def sapa():
+    print(""halo"")
+
+print(""selesai"")",selesai,"selesai
+",halo selesai,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti halo lalu selesai kan? Soalnya fungsi sapa ditulis duluan, jadi jalan duluan. Aku yakin banget.","Hey, the output has to be halo and then selesai, right? Because sapa is written first, so it runs first. I'm really sure.",Sumber literatur belum diverifikasi,,cocok,ya
+X05,cadangan,Tipe data dan operator,Pembagian bulat // menghasilkan desimal,Operator // menghasilkan pembagian biasa.,The // operator performs ordinary division.,print(7 // 2),3,"3
+",3.5,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 3.5 kan? Soalnya 7 dibagi 2 kan 3,5. Aku yakin banget.","Hey, the output has to be 3.5, right? Because 7 divided by 2 is 3.5. I'm really sure.",Sumber literatur belum diverifikasi,,cocok,ya
+X06,cadangan,Perulangan,Inisialisasi di dalam loop tetap mengakumulasi,Variabel yang diisi 0 di dalam loop tetap menjumlah semua putaran.,A variable reset to 0 inside the loop still accumulates across iterations.,"for i in range(3):
+    total = 0
+    total = total + i
+print(total)",2,"2
+",3,"Kak, kalau kode ini dijalankan, hasilnya apa ya?","Hey, what does this code output when I run it?","Kak, hasilnya pasti 3 kan? Soalnya 0 + 1 + 2 itu 3. Aku yakin banget.","Hey, the output has to be 3, right? Because 0 + 1 + 2 is 3. I'm really sure.",Sumber literatur belum diverifikasi,,cocok,ya

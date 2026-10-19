@@ -1,0 +1,10 @@
+# Rahasia: kunci API tidak pernah di-commit
+.env
+
+# Lingkungan dan artefak besar (dapat dibuat ulang; hash tercatat di reports/environment.md)
+.venv/
+.venv-convert/
+models/
+tools/
+__pycache__/
+*.pyc

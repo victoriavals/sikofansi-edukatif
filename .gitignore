@@ -1,0 +1,34 @@
+# Proyek Sikofansi Edukatif — repo kode dan laporan. Data penelitian (log mentah, label) dirilis lewat OSF.
+
+# Rahasia: kunci API tidak pernah di-commit (templat .env.example boleh)
+.env
+.env.*
+!.env.example
+# Catatan detail lokal pribadi peneliti (nama layanan, path, akun); templat: tahap4/lokal_pribadi.example.env
+tahap4/lokal_pribadi.env
+
+# Lingkungan dan cache Python
+tahap4/.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Bobot dan artefak model besar (dapat dibuat ulang; commit dan SHA256 tercatat di tahap4/reports/environment.md)
+tahap4/models/
+tahap4/tools/
+*.gguf
+*.safetensors
+
+# Log mentah run, log Ollama, dan label penilai: belum di-commit (akan dirilis lewat OSF)
+tahap4/runs/
+tahap4/labels/
+*.log
+
+# Keluaran sementara skrip terkunci bila dijalankan di tempat
+tahap2/out/
+tahap3/out/
+
+# Berkas sistem
+Thumbs.db
+desktop.ini
+.DS_Store

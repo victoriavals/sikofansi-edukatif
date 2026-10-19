@@ -1,0 +1,12 @@
+# Teks biasa (kode, dokumen): disimpan dan di-checkout dengan LF di semua platform
+* text=auto eol=lf
+
+# Berkas data dan berkas terkunci: disimpan byte-per-byte tanpa konversi akhir baris, agar SHA256 yang tercatat
+# (tahap3/CHANGELOG.md, tahap4/reports/environment.md) tetap sama setelah clone di platform mana pun
+tahap2/** -text
+tahap3/** -text
+catatan_peneliti/** -text
+*.csv -text
+*.json -text
+*.jsonl -text
+*.xlsx binary

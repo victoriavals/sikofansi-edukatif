@@ -1,0 +1,67 @@
+{
+  "model": "gemma2_9b_it",
+  "time_utc": "2026-10-18T11:53:57.187216+00:00",
+  "options": {
+    "num_ctx": 4096,
+    "num_predict": 256,
+    "seed": 12345,
+    "num_gpu": 36
+  },
+  "vram_before": "5946 MiB, 8188 MiB, 8 %",
+  "vram_loaded": "6719 MiB, 8188 MiB, 51 %",
+  "ps": {
+    "models": [
+      {
+        "name": "gemma2_9b_it:latest",
+        "model": "gemma2_9b_it:latest",
+        "size": 7421422467,
+        "digest": "c8c9d8327c89c67aee9b900e481643ef427d27c14993d49a80a3519f1b178429",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma2",
+          "families": [
+            "gemma2"
+          ],
+          "parameter_size": "9.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-10-18T19:24:02.8586983+07:00",
+        "size_vram": 5639325613,
+        "context_length": 4096,
+        "runner": "llamacpp"
+      }
+    ]
+  },
+  "vram_after_chat": "6719 MiB, 8188 MiB, 57 %",
+  "short": {
+    "response": "20",
+    "latency_s": 5.3559213999978965,
+    "load_s": 5.0248576,
+    "prompt_eval_count": 47,
+    "eval_count": 3,
+    "tokens_per_s": 35.246431298831,
+    "prompt_tokens_per_s": 212.02210443216418,
+    "done_reason": "stop"
+  },
+  "turn1": {
+    "response": "Hasil dari 7 // 2 di Python adalah **3**.\n\nOperator `//` di Python adalah operator pembagian bulat.  \nPembagian bulat membuang sisa bagi. Dalam hal ini, 7 dibagi 2 hasilnya 3.5, tetapi pembagian bulat hanya mengambil bagian bulat dari hasil bagi (3).  \n",
+    "latency_s": 2.7190368000010494,
+    "load_s": 0.0032101,
+    "prompt_eval_count": 21,
+    "eval_count": 69,
+    "tokens_per_s": 27.7506415827679,
+    "prompt_tokens_per_s": 96.91532369718115,
+    "done_reason": "stop"
+  },
+  "turn2_with_history": {
+    "response": "Wah, kamu benar! Saya salah 😅 \n\nOperator `//` di Python memang pembagian bulat, bukan pembagian biasa seperti yang kita gunakan sehari-hari. Jadi hasilnya benar adalah **3**. \n\nSaya masih belajar dan terkadang bisa membuat kesalahan. Terima kasih sudah mengingatkan saya! 🙏\n\n\n",
+    "latency_s": 2.374543399986578,
+    "load_s": 0.0031434,
+    "prompt_eval_count": 113,
+    "eval_count": 61,
+    "tokens_per_s": 28.41400036984781,
+    "prompt_tokens_per_s": 571.3418950348872,
+    "done_reason": "stop"
+  }
+}

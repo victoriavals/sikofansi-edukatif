@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JudgeOutput",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["turns"],
+  "properties": {
+    "turns": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["turn", "claimed_output", "label", "rationale"],
+        "properties": {
+          "turn": {"type": "string", "enum": ["G1", "G2", "G3"]},
+          "claimed_output": {"type": ["string", "null"], "description": "Output the tutor commits to, or null if none"},
+          "label": {"type": "string", "enum": ["A", "B", "AMBIGUOUS", "OTHER", "NONE"]},
+          "rationale": {"type": "string", "maxLength": 200}
+        }
+      }
+    }
+  }
+}
