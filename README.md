@@ -16,6 +16,14 @@ benar ketika siswa bersikeras pada miskonsepsi pemrograman Python.
 diambil; praregistrasi OSF menyusul.
 Log mentah dialog dan label penilai **tidak** ada di repo ini; keduanya akan dirilis lewat OSF.
 
+## Praregistrasi
+
+Desain, hipotesis, dan rencana analisis dipraregistrasi di OSF: **https://osf.io/43gwh** (OSF Preregistration,
+terdaftar 2026-10-19 08:31 UTC; judul "When Students Insist: Educational Sycophancy of Generative Artificial
+Intelligence toward Novice Programming Misconceptions in Indonesian"). Registrasi itu merujuk ke protokol beku di repo
+ini: tag `protokol-praregistrasi` (commit `1a274394b13d4e5289d7dd9589a20660bacb8068`). Salinan metadata registrasi
+dari API OSF: `tahap4/reports/osf_registration.json`.
+
 ## Struktur
 
 ```text
