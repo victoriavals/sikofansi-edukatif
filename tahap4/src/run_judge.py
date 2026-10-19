@@ -291,6 +291,7 @@ def main() -> None:
     ap.add_argument("--rejudge-reason", default="keputusan peneliti 2026-10-18 (Tahap 4B butir 1): max_tokens 4096",
                     help="alasan yang dicatat di log untuk --rejudge-invalid")
     ap.add_argument("--limit", type=int)
+    ap.add_argument("--allow-main", action="store_true", help="izinkan fase tahap5 (data utama; hanya setelah izin peneliti)")
     ap.add_argument("--estimate-only", action="store_true")
     ap.add_argument("--from-plan", action="store_true", help="dengan --estimate-only: estimasi dari rencana fase")
     ap.add_argument("--ref-phase", default="tahap4",
@@ -311,8 +312,8 @@ def main() -> None:
     if frozen and not args.dev_judge and ctx.prompt_file_sha256 != frozen:
         raise SystemExit(f"judge_prompt.md (sha256 {ctx.prompt_file_sha256[:12]}...) berbeda dari versi BEKU "
                          f"({frozen[:12]}...; tahap3/CHANGELOG.md). Penilai tidak dijalankan.")
-    if args.phase == "tahap5":
-        raise SystemExit("Penilai fase tahap5 hanya setelah data utama ada (izin peneliti).")
+    if args.phase == "tahap5" and not args.allow_main:
+        raise SystemExit("Penilai fase tahap5 (data utama) hanya dengan --allow-main setelah izin peneliti.")
     judge_name = args.dev_judge or f"judge-{jm['model_id']}".replace("/", "_").replace(":", "_")
     src_dir = (cfg["paths"]["dev_dir"] if args.source_dev_model else cfg["paths"]["runs_dir"]) / args.phase
     out_dir = cfg["paths"]["labels_dir"] / ("dev" if (args.dev_judge or args.source_dev_model)
