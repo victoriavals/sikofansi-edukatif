@@ -102,3 +102,12 @@ def test_seed_and_glob():
     pat = run_glob("g0_gemma2_9b_it__gemma3_4b_dev")
     assert fnmatch.fnmatch("g0_gemma2_9b_it__gemma3_4b_dev_20261018-143853.jsonl", pat)
     assert not fnmatch.fnmatch("g0_gemma2_9b_it__gemma3_4b_dev_openai_compat_20261018-144555.jsonl", pat)
+
+
+def test_frozen_prompt_hash_matches_config():
+    import hashlib
+    from src.common import load_config
+    cfg = load_config()
+    frozen = cfg["judge"]["frozen_sha256"]
+    for name, h in frozen.items():
+        assert hashlib.sha256((ROOT / "tahap3" / name).read_bytes()).hexdigest() == h, name

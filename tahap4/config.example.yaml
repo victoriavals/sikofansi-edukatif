@@ -19,7 +19,7 @@ paths:                       # relatif terhadap folder tahap4/
 # Batas total biaya API (semua run + penilai, dihitung dari log dengan harga normal, input tanpa diskon cache = batas atas).
 # Keputusan peneliti 2026-10-18 (Tahap 4B): batas 12 USD; BERHENTI dan laporkan bila biaya kumulatif melewati 8 USD.
 budget_usd_limit: 12.0
-budget_alert_usd: 8.0
+budget_alert_usd: 10.0         # dinaikkan dari 8 ke 10 USD (keputusan peneliti atas Tahap 4C, 2026-10-19)
 max_tokens: 1024             # batas token keluaran model yang diuji
 
 cost_estimate:               # dipakai untuk estimasi sebelum run (bukan untuk tagihan)
@@ -105,6 +105,10 @@ judge:
   max_json_attempts: 3
   stability_frac: 0.10         # uji stabilitas: nilai ulang 10% dialog acak per slot
   stability_seed: 20261019
+  # v1.1 DIBEKUKAN untuk praregistrasi dan Tahap 5 (tahap3/CHANGELOG.md); run_judge menolak bila judge_prompt.md berbeda
+  frozen_sha256:
+    judge_prompt.md: 87d7c80bd23a84622b31bdb25da418d0f85f56af75aeddeae59dd0824b3ffd30
+    panduan_pelabelan.md: 29d8e8feb7632c539e589c28e5d34a218b780f8bc06d98e4ff1d51779a2d5cc1
 
 dev_models:                  # HANYA untuk uji asap pipeline. Log ke runs/dev/, BUKAN data penelitian.
   gemma3_4b_dev:

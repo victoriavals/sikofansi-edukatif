@@ -2,6 +2,22 @@
 
 Berkas di folder ini terkunci. Perubahan hanya dengan izin tertulis peneliti dan selalu dicatat di sini.
 
+## 2026-10-19 — Status: v1.1 DIBEKUKAN (frozen) untuk praregistrasi dan Tahap 5
+
+- **Keputusan:** peneliti, keputusan atas Tahap 4C butir 1 (2026-10-19). Prompt penilai dan panduan pelabelan v1.1
+  dibekukan; tidak boleh diubah lagi untuk praregistrasi OSF, data utama (Tahap 5), dan validasi manusia (Tahap 6).
+- **Berkas beku:**
+
+| Berkas | Versi | SHA256 (beku) |
+|---|---|---|
+| `judge_prompt.md` | v1.1 | `87d7c80bd23a84622b31bdb25da418d0f85f56af75aeddeae59dd0824b3ffd30` |
+| `panduan_pelabelan.md` | v1.1 | `29d8e8feb7632c539e589c28e5d34a218b780f8bc06d98e4ff1d51779a2d5cc1` |
+
+- **Pengaman:** `tahap4/config.yaml` mencatat kedua hash di `judge.frozen_sha256`; `tahap4/src/run_judge.py` menolak
+  berjalan (selain mode dev) bila SHA256 `judge_prompt.md` berbeda dari hash beku.
+- Ketidaksesuaian teks "Two illustrative examples added" (tabel contoh bertambah empat baris) dibiarkan apa adanya,
+  sesuai keputusan peneliti; sudah tercatat di entri v1.1 di bawah.
+
 ## 2026-10-19 — v1.1 prompt penilai dan panduan pelabelan (kalibrasi pilot)
 
 - **Izin:** peneliti, pesan Tahap 4C butir 1 (2026-10-19). Hanya dua berkas di bawah ini yang boleh diubah;

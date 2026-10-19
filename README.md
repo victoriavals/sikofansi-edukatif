@@ -11,7 +11,9 @@ benar ketika siswa bersikeras pada miskonsepsi pemrograman Python.
   - dua model lokal Q4_K_M lewat Ollama: Gemma 2 9B IT dan SahabatAI 9B.
 - **Pelabelan:** LLM penilai `glm-5.3-flash` (keluarga berbeda dari semua model yang diuji), lalu divalidasi manusia.
 
-**Status:** pipeline dan uji coba selesai (Tahap 4–4C); data utama (Tahap 5) belum diambil. Praregistrasi OSF menyusul.
+**Status:** pipeline dan uji coba selesai (Tahap 4–4C). **Protokol dibekukan untuk praregistrasi** (tag Git
+`protokol-praregistrasi`; prompt penilai v1.1 beku, SHA256 di `tahap3/CHANGELOG.md`). Data utama (Tahap 5) belum
+diambil; praregistrasi OSF menyusul.
 Log mentah dialog dan label penilai **tidak** ada di repo ini; keduanya akan dirilis lewat OSF.
 
 ## Struktur
@@ -45,7 +47,13 @@ python -m pytest -q tests
 | Nilai G0 otomatis | `python -m src.grade_g0 --models <slot..> --known` |
 | Ringkasan | `python -m src.summarize --models <slot..>` |
 | Bandingkan dua set label | `python -m src.compare_labels --base tahap4 --new tahap4c` |
+| Sampel validasi manusia (Tahap 6, setelah Tahap 5) | `python -m src.sample_validation --phase tahap5` |
+| Uji kunci API (1 panggilan per slot, < 0,01 USD) | `python model_prep/cek_kunci_api.py` |
 | Estimasi biaya | tambahkan `--estimate-only` (penilai: `--estimate-only --from-plan`) |
+
+Ukuran utama: **sikofansi regresif** pada transisi antargiliran berurutan yang berawal dari Benar. Versi UTAMA:
+Benar → Ambigu atau Miskonsepsi. Versi SENSITIVITAS: Benar → Miskonsepsi saja. Metrik sekunder: penarikan koreksi
+(Benar → Tidak disebut). Jenis galat penilai yang diketahui: `tahap4/reports/katalog_galat_penilai.md`.
 
 Data utama ditolak tanpa `--phase tahap5 --allow-main`. Persiapan model lokal (unduh bobot, kuantisasi llama.cpp
 b11714 ke Q4_K_M, pendaftaran ke Ollama, jendela run) ada di `tahap4/model_prep/`. Versi, commit sumber bobot, dan
@@ -61,5 +69,16 @@ SHA256 setiap berkas model tercatat di `tahap4/reports/environment.md`.
 
 ## Lisensi
 
-Kode dirilis dengan lisensi MIT (lihat `LICENSE`). Butir miskonsepsi bersumber dari literatur yang dikutip di
-`tahap2/build_bank.py`; bobot model tunduk pada lisensi masing-masing (Gemma Terms of Use) dan tidak disertakan.
+Repo ini memakai **lisensi ganda**:
+
+| Bagian | Lisensi | Berkas |
+|---|---|---|
+| **Kode** | MIT ([`LICENSE`](LICENSE)) | `tahap4/src/`, `tahap4/tests/`, dan semua skrip `*.py`, `*.sh`, `*.ps1` di folder mana pun (termasuk `tahap2/build_bank.py`, `tahap3/render_prompts.py`, `tahap4/model_prep/`), serta berkas konfigurasi/templat pendukungnya di `tahap4/` |
+| **Data dan dokumen** | CC BY 4.0 ([`LICENSE-DATA`](LICENSE-DATA)) | isi `tahap2/`, `tahap3/`, dan `catatan_peneliti/` selain skrip (bank butir, kunci jawaban, template, rencana dialog, prompt penilai, panduan pelabelan, bahan kalibrasi), laporan di `tahap4/reports/`, `CLAUDE.md`, dan README ini |
+
+Atribusi untuk data dan dokumen (CC BY 4.0): "Sikofansi Edukatif — materi dan laporan penelitian (2026),
+https://github.com/victoriavals/sikofansi-edukatif", dengan menyebutkan perubahan bila ada.
+
+Catatan pihak ketiga: butir miskonsepsi diadaptasi dari literatur yang dikutip di `tahap2/build_bank.py`; template
+chat dan parameter di `tahap4/model_prep/ollama_gemma2_ref/` disalin dari pustaka model Ollama (`gemma2`); bobot
+model tunduk pada lisensi masing-masing (Gemma Terms of Use) dan tidak disertakan.

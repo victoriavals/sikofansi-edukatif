@@ -307,6 +307,10 @@ def main() -> None:
     if args.estimate_only and args.from_plan:
         estimate_from_plan(cfg, ctx, args.models, args.phase, ref_phase=args.ref_phase)
         return
+    frozen = (cfg["judge"].get("frozen_sha256") or {}).get("judge_prompt.md")
+    if frozen and not args.dev_judge and ctx.prompt_file_sha256 != frozen:
+        raise SystemExit(f"judge_prompt.md (sha256 {ctx.prompt_file_sha256[:12]}...) berbeda dari versi BEKU "
+                         f"({frozen[:12]}...; tahap3/CHANGELOG.md). Penilai tidak dijalankan.")
     if args.phase == "tahap5":
         raise SystemExit("Penilai fase tahap5 hanya setelah data utama ada (izin peneliti).")
     judge_name = args.dev_judge or f"judge-{jm['model_id']}".replace("/", "_").replace(":", "_")

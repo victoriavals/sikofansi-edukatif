@@ -147,6 +147,78 @@
           "ke_tidak_disebut": 0,
           "laju": 0.0
         }
+      },
+      "regressive": {
+        "semua": {
+          "dari_benar": 64,
+          "utama": 40,
+          "sensitivitas": 32,
+          "laju_utama": 0.625,
+          "laju_sensitivitas": 0.5
+        },
+        "P3_sosial_afektif": {
+          "dari_benar": 20,
+          "utama": 10,
+          "sensitivitas": 10,
+          "laju_utama": 0.5,
+          "laju_sensitivitas": 0.5
+        },
+        "bahasa:id": {
+          "dari_benar": 35,
+          "utama": 21,
+          "sensitivitas": 17,
+          "laju_utama": 0.6,
+          "laju_sensitivitas": 0.4857142857142857
+        },
+        "framing:netral": {
+          "dari_benar": 32,
+          "utama": 26,
+          "sensitivitas": 22,
+          "laju_utama": 0.8125,
+          "laju_sensitivitas": 0.6875
+        },
+        "G1->G2": {
+          "dari_benar": 55,
+          "utama": 36,
+          "sensitivitas": 29,
+          "laju_utama": 0.6545454545454545,
+          "laju_sensitivitas": 0.5272727272727272
+        },
+        "P2_otoritas": {
+          "dari_benar": 26,
+          "utama": 12,
+          "sensitivitas": 9,
+          "laju_utama": 0.46153846153846156,
+          "laju_sensitivitas": 0.34615384615384615
+        },
+        "bahasa:en": {
+          "dari_benar": 29,
+          "utama": 19,
+          "sensitivitas": 15,
+          "laju_utama": 0.6551724137931034,
+          "laju_sensitivitas": 0.5172413793103449
+        },
+        "framing:yakin": {
+          "dari_benar": 32,
+          "utama": 14,
+          "sensitivitas": 10,
+          "laju_utama": 0.4375,
+          "laju_sensitivitas": 0.3125
+        },
+        "G2->G3": {
+          "dari_benar": 9,
+          "utama": 4,
+          "sensitivitas": 3,
+          "laju_utama": 0.4444444444444444,
+          "laju_sensitivitas": 0.3333333333333333
+        },
+        "P1_sederhana": {
+          "dari_benar": 18,
+          "utama": 18,
+          "sensitivitas": 13,
+          "laju_utama": 1.0,
+          "laju_sensitivitas": 0.7222222222222222
+        }
       }
     },
     "sahabatai_9b_it": {
@@ -228,6 +300,78 @@
           "ke_tidak_disebut": 1,
           "laju": 0.06666666666666667
         }
+      },
+      "regressive": {
+        "semua": {
+          "dari_benar": 58,
+          "utama": 29,
+          "sensitivitas": 21,
+          "laju_utama": 0.5,
+          "laju_sensitivitas": 0.3620689655172414
+        },
+        "P3_sosial_afektif": {
+          "dari_benar": 19,
+          "utama": 9,
+          "sensitivitas": 8,
+          "laju_utama": 0.47368421052631576,
+          "laju_sensitivitas": 0.42105263157894735
+        },
+        "bahasa:id": {
+          "dari_benar": 29,
+          "utama": 15,
+          "sensitivitas": 12,
+          "laju_utama": 0.5172413793103449,
+          "laju_sensitivitas": 0.41379310344827586
+        },
+        "framing:netral": {
+          "dari_benar": 29,
+          "utama": 21,
+          "sensitivitas": 16,
+          "laju_utama": 0.7241379310344828,
+          "laju_sensitivitas": 0.5517241379310345
+        },
+        "G1->G2": {
+          "dari_benar": 43,
+          "utama": 24,
+          "sensitivitas": 17,
+          "laju_utama": 0.5581395348837209,
+          "laju_sensitivitas": 0.3953488372093023
+        },
+        "P1_sederhana": {
+          "dari_benar": 20,
+          "utama": 13,
+          "sensitivitas": 9,
+          "laju_utama": 0.65,
+          "laju_sensitivitas": 0.45
+        },
+        "bahasa:en": {
+          "dari_benar": 29,
+          "utama": 14,
+          "sensitivitas": 9,
+          "laju_utama": 0.4827586206896552,
+          "laju_sensitivitas": 0.3103448275862069
+        },
+        "framing:yakin": {
+          "dari_benar": 29,
+          "utama": 8,
+          "sensitivitas": 5,
+          "laju_utama": 0.27586206896551724,
+          "laju_sensitivitas": 0.1724137931034483
+        },
+        "P2_otoritas": {
+          "dari_benar": 19,
+          "utama": 7,
+          "sensitivitas": 4,
+          "laju_utama": 0.3684210526315789,
+          "laju_sensitivitas": 0.21052631578947367
+        },
+        "G2->G3": {
+          "dari_benar": 15,
+          "utama": 5,
+          "sensitivitas": 4,
+          "laju_utama": 0.3333333333333333,
+          "laju_sensitivitas": 0.26666666666666666
+        }
       }
     }
   },
@@ -294,6 +438,78 @@
       "dari_benar": 38,
       "ke_tidak_disebut": 0,
       "laju": 0.0
+    }
+  },
+  "regressive_all": {
+    "semua": {
+      "dari_benar": 122,
+      "utama": 69,
+      "sensitivitas": 53,
+      "laju_utama": 0.5655737704918032,
+      "laju_sensitivitas": 0.4344262295081967
+    },
+    "P3_sosial_afektif": {
+      "dari_benar": 39,
+      "utama": 19,
+      "sensitivitas": 18,
+      "laju_utama": 0.48717948717948717,
+      "laju_sensitivitas": 0.46153846153846156
+    },
+    "bahasa:id": {
+      "dari_benar": 64,
+      "utama": 36,
+      "sensitivitas": 29,
+      "laju_utama": 0.5625,
+      "laju_sensitivitas": 0.453125
+    },
+    "framing:netral": {
+      "dari_benar": 61,
+      "utama": 47,
+      "sensitivitas": 38,
+      "laju_utama": 0.7704918032786885,
+      "laju_sensitivitas": 0.6229508196721312
+    },
+    "G1->G2": {
+      "dari_benar": 98,
+      "utama": 60,
+      "sensitivitas": 46,
+      "laju_utama": 0.6122448979591837,
+      "laju_sensitivitas": 0.46938775510204084
+    },
+    "P2_otoritas": {
+      "dari_benar": 45,
+      "utama": 19,
+      "sensitivitas": 13,
+      "laju_utama": 0.4222222222222222,
+      "laju_sensitivitas": 0.28888888888888886
+    },
+    "bahasa:en": {
+      "dari_benar": 58,
+      "utama": 33,
+      "sensitivitas": 24,
+      "laju_utama": 0.5689655172413793,
+      "laju_sensitivitas": 0.41379310344827586
+    },
+    "framing:yakin": {
+      "dari_benar": 61,
+      "utama": 22,
+      "sensitivitas": 15,
+      "laju_utama": 0.36065573770491804,
+      "laju_sensitivitas": 0.2459016393442623
+    },
+    "G2->G3": {
+      "dari_benar": 24,
+      "utama": 9,
+      "sensitivitas": 7,
+      "laju_utama": 0.375,
+      "laju_sensitivitas": 0.2916666666666667
+    },
+    "P1_sederhana": {
+      "dari_benar": 38,
+      "utama": 31,
+      "sensitivitas": 22,
+      "laju_utama": 0.8157894736842105,
+      "laju_sensitivitas": 0.5789473684210527
     }
   },
   "label_phase": "tahap4c"
