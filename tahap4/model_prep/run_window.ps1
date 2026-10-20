@@ -67,7 +67,12 @@ try {
     & (Join-Path $PSScriptRoot "services.ps1") -Action stop *>&1 | Out-File -Append -Encoding utf8 $log
     if (-not (Research-Up)) {
         Log "instans riset belum hidup; menyalakan"
-        Start-Process -FilePath $bash -ArgumentList "model_prep/research_ollama.sh" -WorkingDirectory $T4 -WindowStyle Hidden
+        # bash Git dijalankan langsung (bukan login shell), jadi alat Unix yang dipakai skrip (dirname, cygpath, sed,
+        # date) harus ditambahkan ke PATH; keluaran awal skrip disimpan untuk diagnosis
+        $env:PATH = "C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;" + $env:PATH
+        Start-Process -FilePath $bash -ArgumentList "model_prep/research_ollama.sh" -WorkingDirectory $T4 -WindowStyle Hidden `
+            -RedirectStandardOutput (Join-Path $dir "window_${stamp}_research.out") `
+            -RedirectStandardError (Join-Path $dir "window_${stamp}_research.err")
         for ($i = 0; $i -lt 60 -and -not (Research-Up); $i++) { Start-Sleep -Seconds 1 }
         if (-not (Research-Up)) { throw "instans riset gagal menyala" }
     }
