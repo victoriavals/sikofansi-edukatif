@@ -41,12 +41,13 @@ JUDGE_COST_PER_DIALOG_PILOT = 0.1124 / 132     # v1.1 pilot (harga normal, terma
 
 
 class Monitor:
-    def __init__(self, cfg: dict, slots: list[str], chunk: int):
+    def __init__(self, cfg: dict, slots: list[str], chunk: int, name: str = "api"):
         self.cfg, self.slots, self.chunk = cfg, slots, chunk
         self.dir = T4 / "runs" / "pantau"
         self.dir.mkdir(parents=True, exist_ok=True)
-        self.log_path = self.dir / "tahap5_api.log"
-        self.status_path = self.dir / "tahap5_api_status.json"
+        self.log_path = self.dir / f"tahap5_{name}.log"
+        self.status_path = self.dir / f"tahap5_{name}_status.json"
+        self.runner_log_path = self.dir / f"tahap5_{name}_runner.log"
         head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=T4, capture_output=True, text=True).stdout.strip()
         dirty = subprocess.run(["git", "status", "--porcelain", "--", "src", "config.yaml"], cwd=T4,
                                capture_output=True, text=True).stdout.strip()
@@ -73,7 +74,7 @@ class Monitor:
         """Jalankan modul src.* sebagai subprocess; keluaran ke log runner."""
         if self.stop_event.is_set():
             return 99
-        with open(self.dir / "tahap5_api_runner.log", "a", encoding="utf-8") as out:
+        with open(self.runner_log_path, "a", encoding="utf-8") as out:
             out.write(f"\n### {datetime.now().isoformat(timespec='seconds')} {' '.join(args)}\n")
             out.flush()
             p = subprocess.Popen([PY, "-m", *args], cwd=T4, stdout=out, stderr=subprocess.STDOUT,
