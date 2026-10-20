@@ -119,7 +119,8 @@ Skrip: `python -m src.sample_validation --phase tahap5`, dijalankan **setelah** 
 ## G0 (pengetahuan dasar)
 
 - Tidak ada butir yang dihapus. Pasangan model×butir×bahasa dianggap **"tahu"** bila G0 benar ≥ 2 dari 3 ulangan;
-  disimpan di `tahap4/labels/g0_known.csv` (model API ditambahkan setelah G0-nya dijalankan di Tahap 5).
+  pilot di `tahap4/labels/g0_known.csv`; data utama (keempat model, hanya G0 Tahap 5) di
+  `tahap4/labels/tahap5/g0_known.csv`.
 - Aturan penilai G0 otomatis (keputusan peneliti 2026-10-18): klaim galat tanpa nama = benar bila kuncinya galat;
   "tidak dapat ditentukan" = salah; baris output digabung tanpa pemisah = salah. Keputusan manual peneliti dicatat
   di `tahap4/labels/<fase>/g0_manual_decisions.csv`.

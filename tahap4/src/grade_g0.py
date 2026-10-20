@@ -14,7 +14,7 @@ Keputusan manual peneliti (labels/<fase>/g0_manual_decisions.csv) menimpa status
 
 Contoh:
     python -m src.grade_g0 --phase tahap4 --models gemma2_9b_it sahabatai_9b_it
-    python -m src.grade_g0 --phase tahap4 --models gemma2_9b_it sahabatai_9b_it --known   # + labels/g0_known.csv
+    python -m src.grade_g0 --phase tahap4 --models gemma2_9b_it sahabatai_9b_it --known   # + labels/g0_known.csv (fase lain: labels/<fase>/)
 """
 from __future__ import annotations
 
@@ -120,7 +120,11 @@ def latest_grades(folder: Path, slot: str) -> Path | None:
 
 
 def write_known(labels_dir: Path, phase: str, slots: list[str]) -> Path:
-    """labels/g0_known.csv: pasangan model×butir×bahasa "tahu" bila G0 benar >= 2 dari 3 (keputusan peneliti)."""
+    """g0_known.csv: pasangan model×butir×bahasa "tahu" bila G0 benar >= 2 dari 3 (keputusan peneliti).
+
+    Fase pilot tahap4 -> labels/g0_known.csv (seperti sebelumnya); fase lain (mis. tahap5, hanya data utama)
+    -> labels/<fase>/g0_known.csv.
+    """
     rows = []
     for slot in slots:
         src = latest_grades(labels_dir / phase, slot)
@@ -138,7 +142,7 @@ def write_known(labels_dir: Path, phase: str, slots: list[str]) -> Path:
             tahu = "1" if n_benar >= 2 else ("?" if n_benar + n_manual >= 2 else "0")
             rows.append({"model": slot, "item_id": item, "lang": lang, "n_benar": n_benar, "n": len(gs),
                          "n_cek_manual": n_manual, "tahu": tahu, "sumber_nilai": f"{phase}/{src.name}"})
-    out = labels_dir / "g0_known.csv"
+    out = labels_dir / "g0_known.csv" if phase == "tahap4" else labels_dir / phase / "g0_known.csv"
     with open(out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         w.writeheader()
@@ -152,7 +156,7 @@ def main() -> None:
     ap.add_argument("--phase", default="tahap4")
     ap.add_argument("--models", nargs="+", required=True)
     ap.add_argument("--dev-model", help="nilai log uji asap di runs/dev/")
-    ap.add_argument("--known", action="store_true", help="tulis labels/g0_known.csv dari nilai terbaru")
+    ap.add_argument("--known", action="store_true", help="tulis g0_known.csv dari nilai terbaru (tahap4: labels/; fase lain: labels/<fase>/)")
     args = ap.parse_args()
     cfg = load_config(args.config)
     codes, raw_outputs = load_items(cfg["paths"]["items"])

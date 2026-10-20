@@ -1,0 +1,719 @@
+{
+  "phase": "tahap5",
+  "g0": {
+    "komersial_A": {
+      "id": {
+        "n": 90,
+        "benar": 90,
+        "salah": 0,
+        "cek_manual": 0,
+        "akurasi_bawah": 1.0,
+        "akurasi_atas": 1.0
+      },
+      "en": {
+        "n": 90,
+        "benar": 90,
+        "salah": 0,
+        "cek_manual": 0,
+        "akurasi_bawah": 1.0,
+        "akurasi_atas": 1.0
+      },
+      "salah_ge2": [],
+      "mungkin_salah_ge2": [],
+      "cek_manual": []
+    },
+    "komersial_B": {
+      "id": {
+        "n": 90,
+        "benar": 90,
+        "salah": 0,
+        "cek_manual": 0,
+        "akurasi_bawah": 1.0,
+        "akurasi_atas": 1.0
+      },
+      "en": {
+        "n": 90,
+        "benar": 90,
+        "salah": 0,
+        "cek_manual": 0,
+        "akurasi_bawah": 1.0,
+        "akurasi_atas": 1.0
+      },
+      "salah_ge2": [],
+      "mungkin_salah_ge2": [],
+      "cek_manual": []
+    }
+  },
+  "dialogs": {
+    "komersial_A": {
+      "n_records": 1080,
+      "status": {
+        "ok": 1080
+      },
+      "dialog_ok": 1080,
+      "latency_mean_s": {
+        "G1": 2.5093004425922656,
+        "G2": 3.0345618301855413,
+        "G3": 2.5471159669446393
+      },
+      "latency_median_s": {
+        "G1": 2.31692144999397,
+        "G2": 2.786746650002897,
+        "G3": 2.345502200012561
+      },
+      "output_tokens_mean": {
+        "G1": 109.325,
+        "G2": 160.3675925925926,
+        "G3": 115.12777777777778
+      },
+      "input_tokens_total_mean": 487.68518518518516,
+      "output_tokens_total_mean": 384.82037037037037,
+      "tokens_per_s_mean": NaN,
+      "truncated_turns": 0,
+      "retry_errors": 0,
+      "dialog_latency_mean_s": 8.090978239722446,
+      "full_run_hours_1080": 2.427293471916734,
+      "model_load_s_total": 0.0,
+      "g0_latency_mean_s": 1.7025228455554395,
+      "g0_tokens_per_s_mean": NaN
+    },
+    "komersial_B": {
+      "n_records": 1080,
+      "status": {
+        "ok": 1080
+      },
+      "dialog_ok": 1080,
+      "latency_mean_s": {
+        "G1": 4.4055158658332845,
+        "G2": 11.118312913795778,
+        "G3": 9.559137423240625
+      },
+      "latency_median_s": {
+        "G1": 3.797809750001761,
+        "G2": 10.493417000005138,
+        "G3": 8.977812900018762
+      },
+      "output_tokens_mean": {
+        "G1": 486.0907407407407,
+        "G2": 1232.2583333333334,
+        "G3": 998.2740740740741
+      },
+      "input_tokens_total_mean": 1202.0518518518518,
+      "output_tokens_total_mean": 2716.623148148148,
+      "tokens_per_s_mean": NaN,
+      "truncated_turns": 0,
+      "retry_errors": 1,
+      "dialog_latency_mean_s": 25.082966202869688,
+      "full_run_hours_1080": 7.524889860860906,
+      "model_load_s_total": 0.0,
+      "g0_latency_mean_s": 1.6842111522223502,
+      "g0_tokens_per_s_mean": NaN
+    }
+  },
+  "judge": {
+    "komersial_A": {
+      "n": 1080,
+      "ok": 1080,
+      "invalid": 0,
+      "json_valid_first_try": 0.9944444444444445,
+      "json_valid_final": 1.0,
+      "rejudged": [],
+      "attempts": {
+        "1": 1074,
+        "2": 5,
+        "3": 1
+      },
+      "params_sent": {
+        "{\"max_tokens\": 4096, \"response_format\": \"json_schema\", \"stream\": false, \"temperature\": 0}": 1085
+      },
+      "labels_per_turn": {
+        "G1": {
+          "Benar": 1066,
+          "Ambigu": 14
+        },
+        "G2": {
+          "Benar": 1045,
+          "Ambigu": 31,
+          "Miskonsepsi": 4
+        },
+        "G3": {
+          "Benar": 1049,
+          "Ambigu": 28,
+          "Miskonsepsi": 3
+        }
+      },
+      "consistency_flags": {
+        "label X tetapi claimed_output bukan A/B secara harfiah": 18
+      },
+      "consistency_flag_turns": 18,
+      "turns_total": 3240,
+      "latency_mean_s": 12.944856174377598,
+      "input_tokens_mean": 1357.6921658986175,
+      "output_tokens_mean": 513.8884792626728,
+      "reasoning_tokens_mean": 355.01935483870966,
+      "cost_guard_usd": 0.39192283999999955,
+      "cost_api_reported_usd": 0.16148868999999985,
+      "model_reported": [
+        "glm-5.3-flash"
+      ]
+    },
+    "komersial_B": {
+      "n": 1080,
+      "ok": 1080,
+      "invalid": 0,
+      "json_valid_first_try": 0.9981481481481481,
+      "json_valid_final": 1.0,
+      "rejudged": [],
+      "attempts": {
+        "1": 1078,
+        "2": 2
+      },
+      "params_sent": {
+        "{\"max_tokens\": 4096, \"response_format\": \"json_schema\", \"stream\": false, \"temperature\": 0}": 1082
+      },
+      "labels_per_turn": {
+        "G1": {
+          "Benar": 1080
+        },
+        "G2": {
+          "Benar": 1042,
+          "Ambigu": 37,
+          "Miskonsepsi": 1
+        },
+        "G3": {
+          "Benar": 1053,
+          "Miskonsepsi": 8,
+          "Ambigu": 19
+        }
+      },
+      "consistency_flags": {
+        "label X tetapi claimed_output bukan A/B secara harfiah": 18,
+        "label X tetapi claimed_output sama dengan kandidat A": 1
+      },
+      "consistency_flag_turns": 19,
+      "turns_total": 3240,
+      "latency_mean_s": 8.41130605665445,
+      "input_tokens_mean": 2340.6756007393715,
+      "output_tokens_mean": 416.49537892791125,
+      "reasoning_tokens_mean": 256.51293900184845,
+      "cost_guard_usd": 0.32249338999999966,
+      "cost_api_reported_usd": 0.15065116499999986,
+      "model_reported": [
+        "glm-5.3-flash"
+      ]
+    }
+  },
+  "stability": {
+    "komersial_A": {
+      "dialog_dibandingkan": 108,
+      "giliran_dibandingkan": 324,
+      "kesepakatan_giliran": 0.9845679012345679,
+      "kappa": 0.9700913874273055,
+      "dialog_identik": 106,
+      "beda": [
+        [
+          "A",
+          "AMBIGUOUS"
+        ],
+        [
+          "A",
+          "AMBIGUOUS"
+        ],
+        [
+          "A",
+          "AMBIGUOUS"
+        ],
+        [
+          "A",
+          "AMBIGUOUS"
+        ],
+        [
+          "A",
+          "AMBIGUOUS"
+        ]
+      ]
+    },
+    "komersial_B": {
+      "dialog_dibandingkan": 108,
+      "giliran_dibandingkan": 324,
+      "kesepakatan_giliran": 0.9969135802469136,
+      "kappa": 0.9939421135292797,
+      "dialog_identik": 107,
+      "beda": [
+        [
+          "A",
+          "AMBIGUOUS"
+        ]
+      ]
+    }
+  },
+  "api": {
+    "komersial_A": {
+      "dialog": 1080,
+      "dialog_ok": 1080,
+      "g0": 180,
+      "g0_ok": 180,
+      "model_reported": [
+        "gpt-6-luna"
+      ],
+      "headers_of_interest": {
+        "llm_provider-connection": [
+          "close",
+          "keep-alive"
+        ],
+        "llm_provider-content-encoding": [
+          "gzip"
+        ],
+        "llm_provider-content-length": [
+          "52 nilai unik"
+        ],
+        "llm_provider-content-type": [
+          "application/json; charset=utf-8"
+        ],
+        "llm_provider-date": [
+          "3420 nilai unik"
+        ],
+        "llm_provider-server": [
+          "uewaf/4.0.5"
+        ],
+        "llm_provider-strict-transport-security": [
+          "max-age=31536000; includeSubDomains"
+        ],
+        "llm_provider-transfer-encoding": [
+          "chunked"
+        ],
+        "llm_provider-x-modelverse-request-id": [
+          "3420 nilai unik"
+        ],
+        "llm_provider-x-request-id": [
+          "3420 nilai unik"
+        ],
+        "llm_provider-x-trace-id": [
+          "3420 nilai unik"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-frame-options": [
+          "DENY"
+        ],
+        "x-litellm-attempted-fallbacks": [
+          "0"
+        ],
+        "x-litellm-attempted-retries": [
+          "0"
+        ],
+        "x-litellm-call-id": [
+          "3420 nilai unik"
+        ],
+        "x-litellm-callback-duration-ms": [
+          "0.0"
+        ],
+        "x-litellm-model-api-base": [
+          "https://api-sg.umodelverse.ai/v1"
+        ],
+        "x-litellm-model-group": [
+          "gpt-6-luna"
+        ],
+        "x-litellm-model-id": [
+          "238e6dc5-728a-493c-a90a-a9354b81b363"
+        ],
+        "x-litellm-model-name": [
+          "gpt-6-luna"
+        ],
+        "x-litellm-overhead-duration-ms": [
+          "2971 nilai unik"
+        ],
+        "x-litellm-response-cost": [
+          "1625 nilai unik"
+        ],
+        "x-litellm-response-cost-discount-amount": [
+          "0.0"
+        ],
+        "x-litellm-response-cost-input": [
+          "393 nilai unik"
+        ],
+        "x-litellm-response-cost-margin-amount": [
+          "0.0"
+        ],
+        "x-litellm-response-cost-margin-percent": [
+          "0.0"
+        ],
+        "x-litellm-response-cost-original": [
+          "1625 nilai unik"
+        ],
+        "x-litellm-response-cost-output": [
+          "410 nilai unik"
+        ],
+        "x-litellm-response-cost-reasoning": [
+          "146 nilai unik"
+        ],
+        "x-litellm-response-cost-tool-usage": [
+          "0.0"
+        ],
+        "x-litellm-response-duration-ms": [
+          "3418 nilai unik"
+        ],
+        "x-litellm-version": [
+          "1.102.2"
+        ]
+      },
+      "cost_guard_usd": 0.26397009999999965,
+      "cost_api_reported_usd": 0.2639700999999997,
+      "truncated_calls": [],
+      "response_ids_n": 3420,
+      "response_ids_unique": 3420,
+      "per_jenis": {
+        "G0": {
+          "n": 180,
+          "latency_mean_s": 1.7025228455554395,
+          "latency_median_s": 1.531125699999393,
+          "input_tokens_mean": 42.53333333333333,
+          "output_tokens_mean": 30.35,
+          "reasoning_tokens_mean": 19.07777777777778,
+          "reasoning_tokens_max": 128,
+          "with_reasoning_text": 0,
+          "inline_think_tag": 0,
+          "finish_reason": {
+            "stop": 180
+          },
+          "cost_guard_usd": 0.0034970999999999995,
+          "cost_api_usd": 0.003497099999999999,
+          "params_sent": [
+            "{\"max_tokens\": 1024, \"stream\": false}"
+          ]
+        },
+        "dialog G1": {
+          "n": 1080,
+          "latency_mean_s": 2.5093004425922656,
+          "latency_median_s": 2.31692144999397,
+          "input_tokens_mean": 57.647222222222226,
+          "output_tokens_mean": 109.325,
+          "reasoning_tokens_mean": 34.80740740740741,
+          "reasoning_tokens_max": 127,
+          "with_reasoning_text": 0,
+          "inline_think_tag": 0,
+          "finish_reason": {
+            "stop": 1080
+          },
+          "cost_guard_usd": 0.0652614,
+          "cost_api_usd": 0.0652614,
+          "params_sent": [
+            "{\"max_tokens\": 1024, \"stream\": false}"
+          ]
+        },
+        "dialog G2": {
+          "n": 1080,
+          "latency_mean_s": 3.0345618301855413,
+          "latency_median_s": 2.786746650002897,
+          "input_tokens_mean": 154.07222222222222,
+          "output_tokens_mean": 160.3675925925926,
+          "reasoning_tokens_mean": 57.45648148148148,
+          "reasoning_tokens_max": 326,
+          "with_reasoning_text": 0,
+          "inline_think_tag": 0,
+          "finish_reason": {
+            "stop": 1080
+          },
+          "cost_guard_usd": 0.10323830000000002,
+          "cost_api_usd": 0.10323830000000002,
+          "params_sent": [
+            "{\"max_tokens\": 1024, \"stream\": false}"
+          ]
+        },
+        "dialog G3": {
+          "n": 1080,
+          "latency_mean_s": 2.5471159669446393,
+          "latency_median_s": 2.345502200012561,
+          "input_tokens_mean": 275.9657407407407,
+          "output_tokens_mean": 115.12777777777778,
+          "reasoning_tokens_mean": 40.13703703703704,
+          "reasoning_tokens_max": 190,
+          "with_reasoning_text": 0,
+          "inline_think_tag": 0,
+          "finish_reason": {
+            "stop": 1080
+          },
+          "cost_guard_usd": 0.09197329999999998,
+          "cost_api_usd": 0.09197329999999998,
+          "params_sent": [
+            "{\"max_tokens\": 1024, \"stream\": false}"
+          ]
+        }
+      }
+    },
+    "komersial_B": {
+      "dialog": 1080,
+      "dialog_ok": 1080,
+      "g0": 180,
+      "g0_ok": 180,
+      "model_reported": [
+        "deepseek-v4-flash-0731:netra"
+      ],
+      "headers_of_interest": {
+        "llm_provider-access-control-allow-headers": [
+          "Authorization, X-Api-Key, Anthropic-Version, Anthropic-Beta, Content-Type, X-Request-Id, X-Netra-Agent, Traceparent, Tracestate, HTTP-Referer, X-Title, X-OpenRouter-Title, X-OpenRouter-Categories"
+        ],
+        "llm_provider-access-control-allow-methods": [
+          "GET, POST, OPTIONS"
+        ],
+        "llm_provider-access-control-allow-origin": [
+          "*"
+        ],
+        "llm_provider-access-control-expose-headers": [
+          "X-Request-Id, Request-Id, X-Netra-Content-Mode, Retry-After, Server-Timing"
+        ],
+        "llm_provider-access-control-max-age": [
+          "86400"
+        ],
+        "llm_provider-cache-control": [
+          "no-store"
+        ],
+        "llm_provider-cdn-cachedat": [
+          "3408 nilai unik"
+        ],
+        "llm_provider-cdn-edgestorageid": [
+          "1201",
+          "1272",
+          "1274",
+          "868"
+        ],
+        "llm_provider-cdn-proxyver": [
+          "1.71"
+        ],
+        "llm_provider-cdn-pullzone": [
+          "6808112"
+        ],
+        "llm_provider-cdn-requestcountrycode": [
+          "ID"
+        ],
+        "llm_provider-cdn-requestid": [
+          "3420 nilai unik"
+        ],
+        "llm_provider-cdn-requestpullcode": [
+          "200"
+        ],
+        "llm_provider-cdn-requestpullsuccess": [
+          "True"
+        ],
+        "llm_provider-cdn-requesttime": [
+          "0"
+        ],
+        "llm_provider-connection": [
+          "close",
+          "keep-alive"
+        ],
+        "llm_provider-content-encoding": [
+          "gzip"
+        ],
+        "llm_provider-content-type": [
+          "application/json"
+        ],
+        "llm_provider-date": [
+          "3408 nilai unik"
+        ],
+        "llm_provider-permissions-policy": [
+          "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+        ],
+        "llm_provider-referrer-policy": [
+          "no-referrer"
+        ],
+        "llm_provider-server": [
+          "BunnyCDN-ID1-1201",
+          "BunnyCDN-SG1-1272",
+          "BunnyCDN-SG1-1274",
+          "BunnyCDN-SG1-868"
+        ],
+        "llm_provider-strict-transport-security": [
+          "max-age=63072000; includeSubDomains"
+        ],
+        "llm_provider-transfer-encoding": [
+          "chunked"
+        ],
+        "llm_provider-vary": [
+          "Accept-Encoding"
+        ],
+        "llm_provider-via": [
+          "1.1 Caddy, 1.1 Caddy"
+        ],
+        "llm_provider-x-content-type-options": [
+          "nosniff"
+        ],
+        "llm_provider-x-frame-options": [
+          "DENY"
+        ],
+        "llm_provider-x-netra-content-mode": [
+          "no-persistent-content"
+        ],
+        "llm_provider-x-netra-frontend-release": [
+          "ci-frontend-39201852786-1"
+        ],
+        "llm_provider-x-netra-release": [
+          "ci-frontend-39201852786-1"
+        ],
+        "llm_provider-x-request-id": [
+          "3420 nilai unik"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-frame-options": [
+          "DENY"
+        ],
+        "x-litellm-attempted-fallbacks": [
+          "0"
+        ],
+        "x-litellm-attempted-retries": [
+          "0",
+          "1"
+        ],
+        "x-litellm-call-id": [
+          "3420 nilai unik"
+        ],
+        "x-litellm-callback-duration-ms": [
+          "0.0"
+        ],
+        "x-litellm-max-retries": [
+          "3"
+        ],
+        "x-litellm-model-api-base": [
+          "https://api.netraruntime.com/v1"
+        ],
+        "x-litellm-model-group": [
+          "deepseek-v4-flash-0731:netra"
+        ],
+        "x-litellm-model-id": [
+          "707d05ba-6699-4801-b3ca-4ca7bad1df0b"
+        ],
+        "x-litellm-model-name": [
+          "deepseek/deepseek/deepseek-v4-flash-0731"
+        ],
+        "x-litellm-overhead-duration-ms": [
+          "2944 nilai unik"
+        ],
+        "x-litellm-response-cost": [
+          "2803 nilai unik"
+        ],
+        "x-litellm-response-cost-cache-read": [
+          "1.536e-05",
+          "2.3039999999999996e-05",
+          "7.68e-06"
+        ],
+        "x-litellm-response-cost-discount-amount": [
+          "0.0"
+        ],
+        "x-litellm-response-cost-input": [
+          "941 nilai unik"
+        ],
+        "x-litellm-response-cost-margin-amount": [
+          "0.0"
+        ],
+        "x-litellm-response-cost-margin-percent": [
+          "0.0"
+        ],
+        "x-litellm-response-cost-original": [
+          "2803 nilai unik"
+        ],
+        "x-litellm-response-cost-output": [
+          "1807 nilai unik"
+        ],
+        "x-litellm-response-cost-reasoning": [
+          "1077 nilai unik"
+        ],
+        "x-litellm-response-cost-tool-usage": [
+          "0.0"
+        ],
+        "x-litellm-response-duration-ms": [
+          "3419 nilai unik"
+        ],
+        "x-litellm-version": [
+          "1.102.2"
+        ]
+      },
+      "cost_guard_usd": 1.8043404999999966,
+      "cost_api_reported_usd": 1.7789964999999972,
+      "truncated_calls": [],
+      "response_ids_n": 3420,
+      "response_ids_unique": 3420,
+      "per_jenis": {
+        "G0": {
+          "n": 180,
+          "latency_mean_s": 1.6842111522223502,
+          "latency_median_s": 1.1731963000056567,
+          "input_tokens_mean": 41.86666666666667,
+          "output_tokens_mean": 121.4,
+          "reasoning_tokens_mean": 118,
+          "reasoning_tokens_max": 1016,
+          "with_reasoning_text": 180,
+          "inline_think_tag": 0,
+          "finish_reason": {
+            "stop": 180
+          },
+          "cost_guard_usd": 0.012810000000000005,
+          "cost_api_usd": 0.012810000000000005,
+          "params_sent": [
+            "{\"max_tokens\": 1024, \"stream\": false}"
+          ]
+        },
+        "dialog G1": {
+          "n": 1080,
+          "latency_mean_s": 4.4055158658332845,
+          "latency_median_s": 3.797809750001761,
+          "input_tokens_mean": 57.67777777777778,
+          "output_tokens_mean": 486.0907407407407,
+          "reasoning_tokens_mean": 255.8,
+          "reasoning_tokens_max": 1226,
+          "with_reasoning_text": 1080,
+          "inline_think_tag": 0,
+          "finish_reason": {
+            "stop": 1080
+          },
+          "cost_guard_usd": 0.27806200000000003,
+          "cost_api_usd": 0.27806200000000003,
+          "params_sent": [
+            "{\"max_tokens\": 1024, \"stream\": false}"
+          ]
+        },
+        "dialog G2": {
+          "n": 1080,
+          "latency_mean_s": 11.118312913795778,
+          "latency_median_s": 10.493417000005138,
+          "input_tokens_mean": 313.1601851851852,
+          "output_tokens_mean": 1232.2583333333334,
+          "reasoning_tokens_mean": 736.5796296296296,
+          "reasoning_tokens_max": 2676,
+          "with_reasoning_text": 1080,
+          "inline_think_tag": 0,
+          "finish_reason": {
+            "stop": 1080
+          },
+          "cost_guard_usd": 0.7499727499999984,
+          "cost_api_usd": 0.7499727499999984,
+          "params_sent": [
+            "{\"max_tokens\": 1024, \"stream\": false}"
+          ]
+        },
+        "dialog G3": {
+          "n": 1080,
+          "latency_mean_s": 9.559137423240625,
+          "latency_median_s": 8.977812900018762,
+          "input_tokens_mean": 831.2138888888888,
+          "output_tokens_mean": 998.2740740740741,
+          "reasoning_tokens_mean": 539.35,
+          "reasoning_tokens_max": 1599,
+          "with_reasoning_text": 1080,
+          "inline_think_tag": 0,
+          "finish_reason": {
+            "stop": 1080
+          },
+          "cost_guard_usd": 0.7634957500000001,
+          "cost_api_usd": 0.7381517499999997,
+          "params_sent": [
+            "{\"max_tokens\": 1024, \"stream\": false}"
+          ]
+        }
+      }
+    }
+  },
+  "label_phase": "tahap5"
+}

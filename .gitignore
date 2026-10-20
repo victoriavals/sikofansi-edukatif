@@ -22,6 +22,8 @@ tahap4/tools/
 # Log mentah run, log Ollama, dan label penilai: belum di-commit (akan dirilis lewat OSF)
 tahap4/runs/
 tahap4/labels/
+# Paket rilis data untuk OSF (zip log mentah + label): tidak pernah di-commit
+release/
 *.log
 
 # Keluaran sementara skrip terkunci bila dijalankan di tempat

@@ -221,7 +221,7 @@ def judge_section(slot: str, all_recs: list[dict]) -> tuple[dict, str]:
     ok = [r for r in finals.values() if r["status"] == "ok"]
     calls = [a for r in all_recs for a in r["attempts"] if a.get("raw") is not None]
     dist = {g: Counter(x["label"] for r in ok for x in r["labels"] if x["turn"] == g) for g in ("G1", "G2", "G3")}
-    flags = Counter(re.sub(r"label (A|B|AMBIGUOUS)", "label X", x["consistency_flag"])
+    flags = Counter(re.sub(r"label (AMBIGUOUS|A|B)\b", "label X", x["consistency_flag"])
                     for r in ok for x in r["labels"] if x.get("consistency_flag"))
     n_flag_turns = sum(1 for r in ok for x in r["labels"] if x.get("consistency_flag"))
     modes = Counter(json.dumps(a.get("params_sent"), sort_keys=True) for a in calls)
@@ -285,8 +285,11 @@ def stability_section(slot: str, primary: list[dict], stab: list[dict]) -> tuple
 SAFE_HEADER_HINTS = ("litellm", "provider", "model", "upstream", "request-id", "x-")
 
 
-def api_section(slot: str, recs: list[dict], g0recs: list[dict]) -> tuple[dict, str]:
-    """Ringkasan uji asap model API: latensi, token (termasuk penalaran), biaya pengaman vs biaya dari API."""
+def api_section(slot: str, recs: list[dict], g0recs: list[dict], aggregate: bool = False) -> tuple[dict, str]:
+    """Ringkasan model API: latensi, token (termasuk penalaran), biaya pengaman vs biaya dari API.
+
+    ``aggregate`` (data utama): tabel per jenis panggilan (G0, G1, G2, G3), tanpa daftar per panggilan.
+    """
     turns = [t for r in recs if r["status"] == "ok" for t in r["turns"]]
     calls = turns + [g for g in g0recs if g.get("status") == "ok"]
     reported = [c.get("provider_meta", {}).get("api_reported_cost_usd") for c in calls]
@@ -311,6 +314,8 @@ def api_section(slot: str, recs: list[dict], g0recs: list[dict]) -> tuple[dict, 
          "cost_api_reported_usd": sum(reported) if reported and all(x is not None for x in reported) else None}
     # giliran/panggilan terpotong batas token dilaporkan eksplisit (keputusan peneliti 2026-10-18)
     s["truncated_calls"] = [c["jenis"] for c in s["per_call"] if c["finish_reason"] == "length"]
+    if aggregate:
+        return api_aggregate(slot, s)
     md = [f"#### {slot}\n", "| Panggilan | Latensi (s) | Token input | Token output | Token penalaran | finish | "
           "Biaya pengaman ($) | Biaya dari API ($) |", "|---|---|---|---|---|---|---|---|"]
     for c in s["per_call"]:
@@ -320,9 +325,63 @@ def api_section(slot: str, recs: list[dict], g0recs: list[dict]) -> tuple[dict, 
     return s, "\n".join(md)
 
 
-def api_examples_md(recs: list[dict], g0recs: list[dict]) -> str:
-    """Dialog dan jawaban G0 uji asap model API, disalin persis dari log (penalaran ditampilkan terpisah)."""
+def api_aggregate(slot: str, s: dict) -> tuple[dict, str]:
+    """Ringkas daftar per panggilan menjadi statistik per jenis panggilan (untuk data utama)."""
+    mean = lambda xs: st.mean(xs) if xs else float("nan")
+    groups: dict[str, list[dict]] = defaultdict(list)
+    for c in s["per_call"]:
+        groups[c["jenis"]].append(c)
+    agg = {}
+    for k in sorted(groups, key=lambda x: (x != "G0", x)):
+        cs = groups[k]
+        agg[k] = {"n": len(cs), "latency_mean_s": mean([c["latency_s"] for c in cs]),
+                  "latency_median_s": st.median([c["latency_s"] for c in cs]),
+                  "input_tokens_mean": mean([c["input_tokens"] for c in cs]),
+                  "output_tokens_mean": mean([c["output_tokens"] for c in cs]),
+                  "reasoning_tokens_mean": mean([c["reasoning_tokens"] or 0 for c in cs]),
+                  "reasoning_tokens_max": max(c["reasoning_tokens"] or 0 for c in cs),
+                  "with_reasoning_text": sum(c["reasoning_text_chars"] > 0 for c in cs),
+                  "inline_think_tag": sum(c["inline_think_tag"] for c in cs),
+                  "finish_reason": dict(Counter(c["finish_reason"] for c in cs)),
+                  "cost_guard_usd": sum(c["cost_guard_usd"] or 0 for c in cs),
+                  "cost_api_usd": (sum(c["cost_api_usd"] for c in cs)
+                                   if all(c["cost_api_usd"] is not None for c in cs) else None),
+                  "params_sent": sorted({json.dumps(c["params_sent"], sort_keys=True) for c in cs})}
+    ids = s.pop("response_ids")
+    s.pop("per_call")
+    s["response_ids_n"], s["response_ids_unique"] = len(ids), len(set(ids) - {None})
+    s["per_jenis"] = agg
+    # header per panggilan (request id, tanggal, dsb.) diringkas menjadi jumlah nilai unik
+    s["headers_of_interest"] = {k: (v if len(v) <= 5 else [f"{len(v)} nilai unik"])
+                                for k, v in s["headers_of_interest"].items()}
+    md = [f"#### {slot}\n", "| Panggilan | n | Latensi rata-rata / median (s) | Token input | Token output | "
+          "Token penalaran rata-rata (maks.) | Ada teks penalaran | finish | Biaya pengaman ($) | Biaya dari API ($) |",
+          "|---|---|---|---|---|---|---|---|---|---|"]
+    for k, a in agg.items():
+        api_cost = "–" if a["cost_api_usd"] is None else f"{a['cost_api_usd']:.4f}"
+        finish = ", ".join(f"{x}={n}" for x, n in a["finish_reason"].items())
+        md.append(f"| {k} | {a['n']} | {a['latency_mean_s']:.1f} / {a['latency_median_s']:.1f} | "
+                  f"{a['input_tokens_mean']:.0f} | {a['output_tokens_mean']:.0f} | "
+                  f"{a['reasoning_tokens_mean']:.0f} ({a['reasoning_tokens_max']}) | {a['with_reasoning_text']} | "
+                  f"{finish} | {a['cost_guard_usd']:.4f} | {api_cost} |")
+    hdr = "; ".join(f"`{k}` = {', '.join(map(str, v))}" for k, v in s["headers_of_interest"].items()
+                    if "api-base" in k or "model-name" in k)
+    md.append(f"\nID respons: {s['response_ids_unique']} unik dari {s['response_ids_n']} panggilan; field `model`: "
+              f"{', '.join(s['model_reported'])}; header hulu: {hdr}.")
+    return s, "\n".join(md)
+
+
+def api_examples_md(recs: list[dict], g0recs: list[dict], k_dialogs: int | None = None, k_g0: int | None = None,
+                    seed: int = 20261018) -> str:
+    """Dialog dan jawaban G0 model API, disalin persis dari log (penalaran ditampilkan terpisah).
+
+    ``k_dialogs``/``k_g0``: ambil sampel acak (seed tetap) alih-alih semua (data utama).
+    """
     md = []
+    if k_dialogs is not None:
+        recs = random.Random(seed).sample(sorted(recs, key=lambda r: r["dialog_id"]), min(k_dialogs, len(recs)))
+    if k_g0 is not None:
+        g0recs = random.Random(seed).sample(sorted(g0recs, key=lambda r: r["g0_id"]), min(k_g0, len(g0recs)))
     for d in recs:
         md.append(f"### `{d['dialog_id']}` (status {d['status']}, model API: {', '.join(map(str, d.get('api_models', [])))})\n")
         md.append(f"ID respons: {', '.join(f'`{x}`' for x in d.get('api_response_ids', []))}; sumber log `{d['run_id']}.jsonl`.\n")
@@ -436,7 +495,11 @@ def main() -> None:
     label_mode = bool(args.label_phase and args.label_phase != args.phase)
     if label_mode:
         labels = cfg["paths"]["labels_dir"] / args.label_phase
-    frag = cfg["paths"]["reports_dir"] / "fragments" / (args.label_phase if label_mode else "")
+    # Data utama (selain pilot tahap4): hanya deskriptif. Metrik sikofansi regresif dan penarikan koreksi adalah
+    # analisis Tahap 7, jadi tidak dihitung di sini; potongan ke fragments/<fase>/, CSV tinjauan pilot dilewati.
+    descriptive = args.phase != "tahap4"
+    frag = cfg["paths"]["reports_dir"] / "fragments" / (args.label_phase if label_mode
+                                                        else (args.phase if descriptive else ""))
     frag.mkdir(parents=True, exist_ok=True)
     summary: dict = {"phase": args.phase, "g0": {}, "dialogs": {}}
     g0_md, dlg_md = [], ["| Model | Dialog sukses | Gagal | Galat yang diulang | Latensi bersih rata-rata G1/G2/G3 (s) | "
@@ -457,7 +520,7 @@ def main() -> None:
             summary["dialogs"][slot] = s
             dlg_md.append(md)
         all_dialogs.update({r["dialog_id"]: r for r in recs if r["status"] == "ok"})
-    if not label_mode:
+    if not label_mode and not descriptive:
         summary["judge_review"] = review_sample(labels, args.models, all_dialogs,
                                                 cfg["paths"]["reports_dir"] / "pilot_judge_review.csv",
                                                 regen=args.regen_review)
@@ -470,6 +533,8 @@ def main() -> None:
         jrecs = [r for _, r in iter_records(labels, f"judge_*_{slot}_[0-9]*.jsonl")]
         if jrecs:
             s, md = judge_section(slot, jrecs)
+            if descriptive:
+                s.pop("regressive"), s.pop("correction_withdrawal")
             summary["judge"][slot] = s
             judge_md.append(md)
             judge_all += jrecs
@@ -483,17 +548,19 @@ def main() -> None:
         recs = [r for _, r in iter_records(runs, run_glob(f"dialogs_{slot}"))]
         g0recs = [r for _, r in iter_records(runs, run_glob(f"g0_{slot}"))]
         if recs or g0recs:
-            s, md = api_section(slot, recs, g0recs)
+            s, md = api_section(slot, recs, g0recs, aggregate=descriptive)
             summary["api"][slot] = s
             api_md.append(md)
-            api_ex.append(api_examples_md(recs, g0recs))
+            ok_recs = [r for r in recs if r["status"] == "ok"]
+            api_ex.append(api_examples_md(ok_recs, g0recs, 2, 3) if descriptive else api_examples_md(recs, g0recs))
     if judge_all:
-        finals_ok = [r for r in final_records(judge_all).values() if r["status"] == "ok"]
-        summary["correction_withdrawal_all"] = correction_withdrawal(finals_ok)
-        summary["regressive_all"] = regressive_sycophancy(finals_ok)
-        (frag / "regresif.md").write_text(
-            regressive_md({m: j["regressive"] for m, j in summary["judge"].items()}, summary["regressive_all"]),
-            encoding="utf-8")
+        if not descriptive:
+            finals_ok = [r for r in final_records(judge_all).values() if r["status"] == "ok"]
+            summary["correction_withdrawal_all"] = correction_withdrawal(finals_ok)
+            summary["regressive_all"] = regressive_sycophancy(finals_ok)
+            (frag / "regresif.md").write_text(
+                regressive_md({m: j["regressive"] for m, j in summary["judge"].items()}, summary["regressive_all"]),
+                encoding="utf-8")
         (frag / "judge.md").write_text("\n\n".join(judge_md), encoding="utf-8")
         (frag / "stability.md").write_text("\n".join(stab_md), encoding="utf-8")
         (frag / "judge_examples.md").write_text(judge_examples_md(judge_all), encoding="utf-8")
