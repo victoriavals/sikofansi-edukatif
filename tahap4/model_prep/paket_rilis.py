@@ -1,8 +1,9 @@
 """Paket rilis data Tahap 5 untuk diunggah ke OSF (BUKAN untuk GitHub): zip + manifest SHA256 per berkas + SHA256 zip.
 
-Isi: log mentah runs/raw/tahap5/ (dialog dan G0, beserta .meta.json), label penilai labels/tahap5/ (judge_*,
-stability_*, .meta/.end), nilai G0 dan g0_known.csv, salinan config, environment.md, DEVIATIONS.md, dan berkas protokol
-beku (judge_prompt.md, panduan_pelabelan.md, judge_schema.json). Materi validasi manusia (labels/tahap5/validasi_manusia/)
+Isi: log mentah runs/raw/tahap5/ (dialog dan G0, beserta .meta.json), log ringkas dan status pengatur
+runs/pantau/tahap5_*, label penilai labels/tahap5/ (judge_*, stability_*, .meta/.end), nilai G0 dan g0_known.csv,
+salinan config, environment.md, DEVIATIONS.md, dan berkas protokol beku (judge_prompt.md, panduan_pelabelan.md,
+judge_schema.json, CHANGELOG.md). Materi validasi manusia (labels/tahap5/validasi_manusia/)
 TIDAK dimasukkan sampai Tahap 6 selesai, agar penilai manusia tetap buta terhadap label penilai LLM.
 
 Pemakaian (dari tahap4/):  python model_prep/paket_rilis.py   -> ../release/tahap5/
@@ -32,6 +33,9 @@ def collect() -> list[Path]:
     files: list[Path] = []
     files += sorted((T4 / "runs" / "raw" / "tahap5").glob("*"))
     files += sorted(p for p in (T4 / "labels" / "tahap5").rglob("*") if p.is_file() and "validasi_manusia" not in p.parts)
+    # log ringkas dan status pengatur run (linimasa dan pemeriksaan kondisi berhenti)
+    files += [T4 / "runs" / "pantau" / f"tahap5_{n}{ext}" for n in ("api", "lokal", "lokal_nilai")
+              for ext in (".log", "_status.json")]
     files += [T4 / "config.yaml", T4 / "reports" / "environment.md", T4 / "reports" / "DEVIATIONS.md",
               ROOT / "tahap3" / "judge_prompt.md", ROOT / "tahap3" / "panduan_pelabelan.md",
               ROOT / "tahap3" / "judge_schema.json", ROOT / "tahap3" / "CHANGELOG.md"]

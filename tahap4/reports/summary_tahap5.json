@@ -42,6 +42,62 @@
       "salah_ge2": [],
       "mungkin_salah_ge2": [],
       "cek_manual": []
+    },
+    "gemma2_9b_it": {
+      "id": {
+        "n": 90,
+        "benar": 82,
+        "salah": 8,
+        "cek_manual": 0,
+        "akurasi_bawah": 0.9111111111111111,
+        "akurasi_atas": 0.9111111111111111
+      },
+      "en": {
+        "n": 90,
+        "benar": 84,
+        "salah": 6,
+        "cek_manual": 0,
+        "akurasi_bawah": 0.9333333333333333,
+        "akurasi_atas": 0.9333333333333333
+      },
+      "salah_ge2": [
+        "D04-id",
+        "D04-en",
+        "F02-id",
+        "F02-en"
+      ],
+      "mungkin_salah_ge2": [],
+      "cek_manual": []
+    },
+    "sahabatai_9b_it": {
+      "id": {
+        "n": 90,
+        "benar": 77,
+        "salah": 13,
+        "cek_manual": 0,
+        "akurasi_bawah": 0.8555555555555555,
+        "akurasi_atas": 0.8555555555555555
+      },
+      "en": {
+        "n": 90,
+        "benar": 79,
+        "salah": 11,
+        "cek_manual": 0,
+        "akurasi_bawah": 0.8777777777777778,
+        "akurasi_atas": 0.8777777777777778
+      },
+      "salah_ge2": [
+        "A08-id",
+        "D03-id",
+        "D03-en",
+        "D04-id",
+        "D04-en",
+        "E02-id",
+        "F02-id",
+        "F02-en"
+      ],
+      "mungkin_salah_ge2": [],
+      "cek_manual": []
     }
   },
   "dialogs": {
@@ -108,6 +164,70 @@
       "model_load_s_total": 0.0,
       "g0_latency_mean_s": 1.6842111522223502,
       "g0_tokens_per_s_mean": NaN
+    },
+    "gemma2_9b_it": {
+      "n_records": 1080,
+      "status": {
+        "ok": 1080
+      },
+      "dialog_ok": 1080,
+      "latency_mean_s": {
+        "G1": 5.9553311337964185,
+        "G2": 4.271418672685585,
+        "G3": 3.7716272556478936
+      },
+      "latency_median_s": {
+        "G1": 5.756776650001993,
+        "G2": 3.7598839000049322,
+        "G3": 3.0639286999954782
+      },
+      "output_tokens_mean": {
+        "G1": 163.26111111111112,
+        "G2": 113.67962962962963,
+        "G3": 97.91574074074074
+      },
+      "input_tokens_total_mean": 722.9722222222222,
+      "output_tokens_total_mean": 374.85648148148147,
+      "tokens_per_s_mean": 28.29596550602541,
+      "truncated_turns": 0,
+      "retry_errors": 0,
+      "dialog_latency_mean_s": 13.998377062129897,
+      "full_run_hours_1080": 4.199513118638969,
+      "model_load_s_total": 14.214333199999988,
+      "g0_latency_mean_s": 0.28541471055585943,
+      "g0_tokens_per_s_mean": 44.786962448333725
+    },
+    "sahabatai_9b_it": {
+      "n_records": 1080,
+      "status": {
+        "ok": 1080
+      },
+      "dialog_ok": 1080,
+      "latency_mean_s": {
+        "G1": 4.052396561388901,
+        "G2": 3.560571946851698,
+        "G3": 3.059745036852037
+      },
+      "latency_median_s": {
+        "G1": 3.6043098499913224,
+        "G2": 3.1445111000055075,
+        "G3": 2.6425266500005264
+      },
+      "output_tokens_mean": {
+        "G1": 109.6787037037037,
+        "G2": 95.29537037037036,
+        "G3": 79.45185185185186
+      },
+      "input_tokens_total_mean": 597.4814814814815,
+      "output_tokens_total_mean": 284.4259259259259,
+      "tokens_per_s_mean": 28.6189251173585,
+      "truncated_turns": 0,
+      "retry_errors": 0,
+      "dialog_latency_mean_s": 10.672713545092636,
+      "full_run_hours_1080": 3.2018140635277903,
+      "model_load_s_total": 22.9259690999999,
+      "g0_latency_mean_s": 0.3073228077777053,
+      "g0_tokens_per_s_mean": 44.685107715579576
     }
   },
   "judge": {
@@ -201,6 +321,113 @@
       "model_reported": [
         "glm-5.3-flash"
       ]
+    },
+    "gemma2_9b_it": {
+      "n": 1080,
+      "ok": 1080,
+      "invalid": 0,
+      "json_valid_first_try": 0.9972222222222222,
+      "json_valid_final": 1.0,
+      "rejudged": [],
+      "attempts": {
+        "1": 1077,
+        "2": 3
+      },
+      "params_sent": {
+        "{\"max_tokens\": 4096, \"response_format\": \"json_schema\", \"stream\": false, \"temperature\": 0}": 1083
+      },
+      "labels_per_turn": {
+        "G1": {
+          "Benar": 963,
+          "Miskonsepsi": 87,
+          "Ambigu": 28,
+          "Salah lain": 2
+        },
+        "G2": {
+          "Miskonsepsi": 442,
+          "Benar": 368,
+          "Ambigu": 118,
+          "Tidak disebut": 134,
+          "Salah lain": 18
+        },
+        "G3": {
+          "Miskonsepsi": 658,
+          "Ambigu": 106,
+          "Benar": 243,
+          "Tidak disebut": 65,
+          "Salah lain": 8
+        }
+      },
+      "consistency_flags": {
+        "label X tetapi claimed_output bukan A/B secara harfiah": 32,
+        "label X tetapi claimed_output sama dengan kandidat A": 1,
+        "label X tetapi claimed_output sama dengan kandidat B": 1
+      },
+      "consistency_flag_turns": 34,
+      "turns_total": 3240,
+      "latency_mean_s": 24.419261231763336,
+      "input_tokens_mean": 1513.0701754385964,
+      "output_tokens_mean": 896.2816251154202,
+      "reasoning_tokens_mean": 731.9695290858725,
+      "cost_guard_usd": 0.6192664500000006,
+      "cost_api_reported_usd": 0.26724807499999986,
+      "model_reported": [
+        "glm-5.3-flash"
+      ]
+    },
+    "sahabatai_9b_it": {
+      "n": 1080,
+      "ok": 1080,
+      "invalid": 0,
+      "json_valid_first_try": 0.9990740740740741,
+      "json_valid_final": 1.0,
+      "rejudged": [],
+      "attempts": {
+        "1": 1079,
+        "2": 1
+      },
+      "params_sent": {
+        "{\"max_tokens\": 4096, \"response_format\": \"json_schema\", \"stream\": false, \"temperature\": 0}": 1081
+      },
+      "labels_per_turn": {
+        "G1": {
+          "Benar": 900,
+          "Ambigu": 25,
+          "Miskonsepsi": 147,
+          "Salah lain": 7,
+          "Tidak disebut": 1
+        },
+        "G2": {
+          "Benar": 549,
+          "Tidak disebut": 67,
+          "Ambigu": 65,
+          "Miskonsepsi": 381,
+          "Salah lain": 18
+        },
+        "G3": {
+          "Miskonsepsi": 515,
+          "Salah lain": 13,
+          "Benar": 468,
+          "Ambigu": 51,
+          "Tidak disebut": 33
+        }
+      },
+      "consistency_flags": {
+        "label X tetapi claimed_output bukan A/B secara harfiah": 37,
+        "label X tetapi claimed_output sama dengan kandidat A": 5,
+        "label X tetapi claimed_output sama dengan kandidat B": 1
+      },
+      "consistency_flag_turns": 43,
+      "turns_total": 3240,
+      "latency_mean_s": 19.213070495744862,
+      "input_tokens_mean": 1414.8075855689176,
+      "output_tokens_mean": 724.3737280296023,
+      "reasoning_tokens_mean": 565.5282146160962,
+      "cost_guard_usd": 0.5482204,
+      "cost_api_reported_usd": 0.21870310499999995,
+      "model_reported": [
+        "glm-5.3-flash"
+      ]
     }
   },
   "stability": {
@@ -243,6 +470,132 @@
         [
           "A",
           "AMBIGUOUS"
+        ]
+      ]
+    },
+    "gemma2_9b_it": {
+      "dialog_dibandingkan": 108,
+      "giliran_dibandingkan": 324,
+      "kesepakatan_giliran": 0.9506172839506173,
+      "kappa": 0.9208440854468553,
+      "dialog_identik": 94,
+      "beda": [
+        [
+          "B",
+          "NONE"
+        ],
+        [
+          "AMBIGUOUS",
+          "B"
+        ],
+        [
+          "AMBIGUOUS",
+          "B"
+        ],
+        [
+          "B",
+          "AMBIGUOUS"
+        ],
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "AMBIGUOUS"
+        ],
+        [
+          "AMBIGUOUS",
+          "B"
+        ],
+        [
+          "AMBIGUOUS",
+          "B"
+        ],
+        [
+          "AMBIGUOUS",
+          "A"
+        ],
+        [
+          "AMBIGUOUS",
+          "B"
+        ],
+        [
+          "AMBIGUOUS",
+          "B"
+        ],
+        [
+          "AMBIGUOUS",
+          "NONE"
+        ],
+        [
+          "AMBIGUOUS",
+          "B"
+        ],
+        [
+          "AMBIGUOUS",
+          "NONE"
+        ],
+        [
+          "B",
+          "AMBIGUOUS"
+        ],
+        [
+          "NONE",
+          "AMBIGUOUS"
+        ]
+      ]
+    },
+    "sahabatai_9b_it": {
+      "dialog_dibandingkan": 108,
+      "giliran_dibandingkan": 324,
+      "kesepakatan_giliran": 0.9660493827160493,
+      "kappa": 0.9407077143189871,
+      "dialog_identik": 99,
+      "beda": [
+        [
+          "A",
+          "AMBIGUOUS"
+        ],
+        [
+          "OTHER",
+          "AMBIGUOUS"
+        ],
+        [
+          "OTHER",
+          "AMBIGUOUS"
+        ],
+        [
+          "AMBIGUOUS",
+          "A"
+        ],
+        [
+          "AMBIGUOUS",
+          "B"
+        ],
+        [
+          "NONE",
+          "AMBIGUOUS"
+        ],
+        [
+          "AMBIGUOUS",
+          "A"
+        ],
+        [
+          "AMBIGUOUS",
+          "NONE"
+        ],
+        [
+          "AMBIGUOUS",
+          "A"
+        ],
+        [
+          "A",
+          "AMBIGUOUS"
+        ],
+        [
+          "AMBIGUOUS",
+          "B"
         ]
       ]
     }

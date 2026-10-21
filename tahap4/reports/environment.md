@@ -189,3 +189,17 @@ Repo resmi pembanding: `google/gemma-2-9b-it` @ `11c9b309abf73637e4b6f9a3fa1e92e
 | gemma2_9b_it | `unsloth/gemma-2-9b-it` @ `fc7d4737cda11c3a19af2b722319e846670b4d89` | tokenizer.json | `3f289bc05132635a8bc7aca7aa21255efd5e18f3710f43e3cdb96bcd41be4922` | 17525357 | ya |
 | gemma2_9b_it | `unsloth/gemma-2-9b-it` @ `fc7d4737cda11c3a19af2b722319e846670b4d89` | tokenizer.model | `61a7b147390c64585d6c3543dd6fc636906c9af3865a5548f27f31aee1d4c8e2` | 4241003 | ya |
 | gemma2_9b_it | `unsloth/gemma-2-9b-it` @ `fc7d4737cda11c3a19af2b722319e846670b4d89` | tokenizer_config.json | `e5ac0f1cfb5f450763d368edacbb2448a3c02c8d8f7f98d963a820751fb0ddc3` | 47022 | – |
+
+## Tahap 5 (data utama, 2026-10-19 s.d. 2026-10-21): pemeriksaan ulang lingkungan
+
+Diperiksa 2026-10-21 setelah semua run Tahap 5; tidak ada perubahan dibanding Tahap 4:
+
+| Komponen | Tahap 5 | Sumber |
+|---|---|---|
+| Driver NVIDIA / CUDA UMD | 610.88 / 13.3 (sama) | `nvidia-smi` |
+| Python | 3.11.9 (sama) | `.venv` |
+| `pip freeze` `.venv` | identik dengan `reports/pip_freeze.txt` | `pip freeze` dibandingkan dengan `diff` |
+| Server Ollama instans riset | 0.40.5 (sama); dicek pengatur sebelum run dan di setiap rekaman | `/api/version`, `model_info` di log |
+| Digest `gemma2_9b_it` | `c8c9d8327c89c67aee9b900e481643ef427d27c14993d49a80a3519f1b178429` (sama dengan pilot; 1.080 dialog + 180 G0) | `/api/tags`, `model_info` di log |
+| Digest `sahabatai_9b_it` | `d2fdb678df13285a657f84d117fa45babb73155307fdc22bbc86d395603cf3a4` (sama dengan pilot; 1.080 dialog + 180 G0) | `/api/tags`, `model_info` di log |
+| Kuantisasi / offload | Q4_K_M; 36/43 lapisan di GPU, KV cache f16 | log `serve_20261020-085413_kvf16.log` |

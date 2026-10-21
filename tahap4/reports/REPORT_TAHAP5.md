@@ -1,34 +1,29 @@
-# Laporan Tahap 5 — Pengumpulan data utama (SEMENTARA: Bagian A selesai)
+# Laporan Tahap 5 — Pengumpulan data utama
 
-Disusun oleh simax, 2026-10-20, untuk peneliti dan reviewer. Protokol acuan: praregistrasi OSF
-https://osf.io/43gwh, tag Git `protokol-praregistrasi` (commit `1a27439`).
-
-**Status laporan: sementara.**
-
-- **Bagian A (model API) dan penilaiannya:** selesai.
-- **Bagian B (model lokal):** belum dijalankan. Jendela run lokal di instruksi masih berupa placeholder ("[isi tanggal dan jam … atau "menyusul"]"). Sesuai instruksi "Jangan menjeda layanan di luar jendela yang disebut di sini", layanan Ollama produksi peneliti tidak dijeda dan tidak ada run lokal.
-- **Bergantung pada Bagian B:** penilaian model lokal (C), `g0_known.csv` keempat model (D), sampling validasi manusia (E), dan paket rilis OSF. Semuanya menunggu.
-
-Bagian 3–8 di bawah memuat angka dari log apa adanya.
+Disusun oleh simax, 2026-10-21, untuk peneliti dan reviewer. Protokol acuan: praregistrasi OSF
+https://osf.io/43gwh, tag Git `protokol-praregistrasi` (commit `1a27439`). Laporan ini menggantikan versi sementara
+(commit `c603c74`, Bagian A saja).
 
 ## Ringkasan
 
-| Bagian | Isi | Status |
+| Bagian | Isi | Hasil |
 |---|---|---|
 | Pemeriksaan awal | 1 OSF, 2 protokol tidak berubah, 3 uji kunci, 4 README | Keempatnya lolos (bagian 1) |
-| A | G0 dan 1.080 dialog per model API | **Selesai.** 2.160/2.160 dialog dan 360/360 G0 sukses; 0 gagal; 0 giliran terpotong |
-| B | G0 dan dialog model lokal di jendela peneliti | **Menunggu jendela** (belum ditentukan) |
-| C | Penilai untuk tiap model setelah model itu selesai | Model API **selesai**: 2.160/2.160 dialog valid, 0 dinilai ulang, 0 dikeluarkan; uji stabilitas 2 × 108 dialog. Model lokal menunggu B |
-| D | Nilai G0 dan `labels/tahap5/g0_known.csv` | Nilai G0 model API selesai (360/360 benar). `g0_known.csv` dibuat setelah G0 lokal |
-| E | Lembar validasi manusia dan berkas kunci | Menunggu semua dialog dinilai |
-| Kondisi berhenti | Biaya, gagal, perubahan model/hulu, terpotong, penilai tidak valid | **Tidak ada yang terpicu** (bagian 4 dan 8) |
+| A | Model API: G0 dan 1.080 dialog per model | 2.160/2.160 dialog, 360/360 G0; 0 gagal; 0 giliran terpotong |
+| B | Model lokal di jendela peneliti | 2.160/2.160 dialog, 360/360 G0; 0 gagal; 0 giliran terpotong; selesai dalam jendela, layanan dipulihkan |
+| C | Penilai `glm-5.3-flash`, prompt v1.1 beku | 4.320/4.320 dialog valid; 0 dinilai ulang; 0 dikeluarkan; uji stabilitas 4 × 108 dialog |
+| D | Nilai G0 dan `labels/tahap5/g0_known.csv` | Selesai: 240 baris (4 model × 30 butir × 2 bahasa); 0 kasus cek manual |
+| E | Sampel validasi manusia | 200 giliran (25 per model × bahasa); lembar penilai dan berkas kunci di folder lokal yang di-ignore; tidak dikirim ke siapa pun |
+| Rilis | Paket OSF | `release/tahap5/sikofansi_tahap5_20261021-082252.zip` (342 berkas, 17,4 MB) |
+| Kondisi berhenti | Biaya, gagal, perubahan model/hulu, terpotong, penilai tidak valid | **Tidak ada yang terpicu** |
+| Penyimpangan protokol | | **Tidak ada.** Perubahan operasional dicatat di `DEVIATIONS.md` bagian B |
 
 ## 1. Pemeriksaan awal
 
 | No. | Pemeriksaan | Hasil |
 |---|---|---|
-| 1 | Praregistrasi OSF | Lolos. https://osf.io/43gwh: publik, terdaftar 2026-10-19 08:31:08 UTC, tidak ditarik, tidak tertunda. Merujuk commit `1a27439`, tag `protokol-praregistrasi`, dan kedua SHA256 beku. Judul sesuai naskah (dikonfirmasi peneliti). Metadata disimpan di `tahap4/reports/osf_registration.json` |
-| 2 | Protokol tidak berubah sejak tag | Lolos. `git diff protokol-praregistrasi -- tahap2 tahap3` kosong saat pemeriksaan dan diulang setelah Bagian A (2026-10-20): tetap kosong. SHA256 `judge_prompt.md` = `87d7c80b…3ffd30`, `panduan_pelabelan.md` = `29d8e8fe…2d5cc1` (sama dengan hash beku) |
+| 1 | Praregistrasi OSF | Lolos. https://osf.io/43gwh: publik, terdaftar 2026-10-19 08:31:08 UTC, tidak ditarik, tidak tertunda. Merujuk commit `1a27439`, tag `protokol-praregistrasi`, dan kedua SHA256 beku. Judul sesuai naskah (dikonfirmasi peneliti). Metadata di `tahap4/reports/osf_registration.json` |
+| 2 | Protokol tidak berubah sejak tag | Lolos. `git diff protokol-praregistrasi -- tahap2 tahap3` kosong saat pemeriksaan, setelah Bagian A, dan setelah semua run (2026-10-21). SHA256 `judge_prompt.md` = `87d7c80b…3ffd30`, `panduan_pelabelan.md` = `29d8e8fe…2d5cc1` (sama dengan hash beku) |
 | 3 | Uji kunci API | Lolos. `model_prep/cek_kunci_api.py`, 2026-10-19 15:43 WIB: ketiga slot `ok`. Field `model`: `gpt-6-luna`, `deepseek-v4-flash-0731:netra`, `glm-5.3-flash`. Biaya $0,000083 |
 | 4 | README berisi tautan OSF; `osf_registration.json` di-commit | Lolos. Commit `642289a` (sudah di-push) |
 
@@ -36,117 +31,170 @@ Bagian 3–8 di bawah memuat angka dari log apa adanya.
 
 ## 2. Linimasa (WIB, UTC+7)
 
+**Bagian A dan penilainya** (pengatur `model_prep/jalankan_tahap5_api.py`, commit `283377f`):
+
 | Waktu | Kejadian |
 |---|---|
 | 19 Okt 15:43 | Uji kunci (pemeriksaan 3) |
-| 19 Okt 15:47:04 | Pengatur `model_prep/jalankan_tahap5_api.py --slots komersial_A komersial_B --chunk 30` mulai. Commit `283377f`, tanpa perubahan kode/config yang belum di-commit |
-| 15:47 – 15:52 | G0 `komersial_A` (180) |
-| 15:52 – 15:57 | G0 `komersial_B` (180) |
-| 15:57 – 18:24 | Dialog `komersial_A` (1.080, potongan 30 dialog; kondisi berhenti dicek tiap potongan) |
-| 18:24 – 20 Okt 01:58 | Dialog `komersial_B` (1.080) |
-| 18:24 – 23:09 | Penilai `komersial_A` (utama), berjalan paralel dengan dialog `komersial_B` |
-| 23:09 | Penilaian ulang dialog tidak valid `komersial_A`: tidak ada dialog yang perlu dinilai ulang |
-| 23:09 – 23:35 | Uji stabilitas `komersial_A` (108 dialog) |
-| 20 Okt 01:58 – 04:42 | Penilai `komersial_B` (utama); penilaian ulang: tidak ada |
-| 04:42 – 04:57 | Uji stabilitas `komersial_B` (108 dialog) |
-| 04:58:08 | Pengatur selesai, tanpa kondisi berhenti |
+| 19 Okt 15:47 – 15:57 | G0 `komersial_A`, lalu G0 `komersial_B` (180 + 180) |
+| 19 Okt 15:57 – 18:24 | Dialog `komersial_A` (1.080, potongan 30 dialog; kondisi berhenti dicek tiap potongan) |
+| 19 Okt 18:24 – 20 Okt 01:58 | Dialog `komersial_B` (1.080) |
+| 19 Okt 18:24 – 23:35 | Penilai `komersial_A`: utama, penilaian ulang (tidak ada yang perlu), stabilitas |
+| 20 Okt 01:58 – 04:57 | Penilai `komersial_B`: utama, penilaian ulang (tidak ada), stabilitas |
 
-**Jendela data per model API.** Ketentuannya paling lama dua minggu. Dari G0 pertama sampai dialog terakhir:
+**Bagian B dan penilainya** (pengatur `model_prep/jalankan_tahap5_lokal.py`, commit `30360a9`; perbaikan `fad7659`):
 
-- `komersial_A`: 2 jam 37 menit (19 Okt 15:47 – 18:24 WIB).
-- `komersial_B`: 10 jam 6 menit (19 Okt 15:52 – 20 Okt 01:58 WIB).
+| Waktu | Kejadian |
+|---|---|
+| 20 Okt 08:37 | Run dijadwalkan untuk jendela pertama dari peneliti (20 Okt 22:00 – 21 Okt 08:00). Proses menunggu tanpa menyentuh layanan |
+| 20 Okt pagi | Peneliti mengubah jendela: mulai sekarang, paling lambat 10 jam sejak mulai. Proses tunggu dihentikan sebelum menyentuh layanan |
+| 08:49:31 | **Jendela mulai** (batas 18:49:31). Layanan dijeda 08:49:32 |
+| 08:49 – 08:53 | **Percobaan pertama gagal:** instans riset tidak menyala, karena bash Git tidak menemukan alat Unix di PATH. Tidak ada panggilan model. Layanan dipulihkan otomatis 08:53:00 |
+| 08:54:07 | Diluncurkan ulang dengan perbaikan PATH, batas tetap: kerja 18:34:31, henti paksa 18:39:31. Layanan dijeda 08:54:08 |
+| 08:54:16 | Pemeriksaan awal instans riset lolos (versi Ollama, digest, kuantisasi = pilot) |
+| 08:54 – 08:56 | G0 `gemma2_9b_it`, lalu G0 `sahabatai_9b_it` (180 + 180) |
+| 08:56 – 13:11 | Dialog `gemma2_9b_it` (1.080) |
+| 13:11 – 16:27 | Dialog `sahabatai_9b_it` (1.080) |
+| 16:27:30 – 16:27:59 | Model riset dilepas dari VRAM; **layanan dipulihkan** (ketiganya `Running`; model layanan dimuat kembali). Jendela terpakai 7 jam 38 menit dari 10 jam |
+| 20 Okt 13:12 – 22:31 | Penilai `gemma2_9b_it`: utama, penilaian ulang (tidak ada), stabilitas |
+| 20 Okt 16:28 – 21 Okt 00:23 | Penilai `sahabatai_9b_it`: utama, penilaian ulang (tidak ada), stabilitas |
+| 21 Okt 08:21 | Sampling validasi manusia (bagian E) |
+| 21 Okt 08:22 | Paket rilis OSF |
+
+**Jendela data per model** (dari G0 pertama sampai dialog terakhir; batas untuk model API: dua minggu):
+
+| Model | Jendela | Durasi |
+|---|---|---|
+| `komersial_A` | 19 Okt 15:47 – 18:24 | 2 j 37 m |
+| `komersial_B` | 19 Okt 15:52 – 20 Okt 01:58 | 10 j 6 m |
+| `gemma2_9b_it` | 20 Okt 08:54 – 13:11 | 4 j 17 m |
+| `sahabatai_9b_it` | 20 Okt 08:55 – 16:27 | 7 j 32 m |
 
 ## 3. Kelengkapan
 
 Diperiksa dengan skrip baca-saja terhadap `tahap3/dialogs_plan.jsonl` dan `g0_plan.jsonl`.
 
-| Model | Dialog rencana | Rekaman | `ok` unik | Ganda | Hilang | Di luar rencana | Galat yang diulang | G0 `ok` |
-|---|---|---|---|---|---|---|---|---|
-| `komersial_A` | 1.080 | 1.080 | 1.080 | 0 | 0 | 0 | 0 | 180/180 |
-| `komersial_B` | 1.080 | 1.080 | 1.080 | 0 | 0 | 0 | 1 | 180/180 |
+| Model | Dialog rencana | `ok` unik | Ganda | Hilang | Di luar rencana | Galat yang diulang | G0 `ok` |
+|---|---|---|---|---|---|---|---|
+| `komersial_A` | 1.080 | 1.080 | 0 | 0 | 0 | 0 | 180/180 |
+| `komersial_B` | 1.080 | 1.080 | 0 | 0 | 0 | 1 | 180/180 |
+| `gemma2_9b_it` | 1.080 | 1.080 | 0 | 0 | 0 | 0 | 180/180 |
+| `sahabatai_9b_it` | 1.080 | 1.080 | 0 | 0 | 0 | 0 | 180/180 |
+| **Total** | **4.320** | **4.320** | 0 | 0 | 0 | 1 | **720/720** |
 
-**Hasil pemeriksaan isi** (semua dialog `ok`):
+**Isi, semua model** (dialog `ok`):
 
 - Pesan siswa identik dengan rencana dialog.
 - Riwayat asisten identik dengan respons yang dicatat.
 - Tidak ada system prompt.
-- Parameter yang dikirim hanya `{"max_tokens": 1024, "stream": false}` di 3.240/3.240 giliran per model. Tidak ada temperature, top_p, atau seed.
 
-**Teks penalaran:**
+**Parameter yang dikirim:**
 
-- `komersial_B`: 3.240/3.240 giliran punya teks penalaran terpisah, tersimpan lengkap di `provider_meta.reasoning_text`.
-- Tidak ada satu pun yang masuk riwayat dialog. Dicek dengan mencari 200 karakter awal teks penalaran di setiap pesan asisten.
+- **Model API:** hanya `{"max_tokens": 1024, "stream": false}` di 3.240/3.240 giliran per model; tanpa temperature, top_p, atau seed.
+- **Model lokal:**
+  - opsi `{num_ctx 4096, num_predict 1024, num_gpu 36, seed}` di 3.240/3.240 giliran per model;
+  - `seed` = int(sha256(dialog_id)) mod 2^31, cocok untuk 1.080/1.080 dialog per model;
+  - tanpa override temperature/top_p;
+  - `keep_alive` 30m.
+
+**Teks penalaran `komersial_B`:** 3.240/3.240 giliran tersimpan lengkap di `provider_meta.reasoning_text`.
+
+- Tidak ada yang masuk riwayat dialog. Dicek dengan mencari 200 karakter awal teks penalaran di setiap pesan asisten.
 - Tidak ada tag `<think>` di dalam `content`.
-- `komersial_A` tidak mengembalikan teks penalaran, hanya jumlah token penalaran.
+- `komersial_A` hanya mengembalikan jumlah token penalaran.
 
-**Satu galat yang diulang.** Di `E04-yakin-P1-en-komersial_B-r1`, percobaan pertama satu giliran mengembalikan respons kosong (`finish_reason=stop`, 740 token keluaran, semuanya penalaran). Respons itu tetap ditagih $0,000431, dicatat di `errors` dan `failed_calls_cost_usd`, lalu diulang otomatis. Percobaan kedua sukses.
+**Satu galat yang diulang.** Di `E04-yakin-P1-en-komersial_B-r1`, percobaan pertama satu giliran mengembalikan respons kosong (740 token, semuanya penalaran). Respons itu tetap ditagih $0,000431 dan dicatat di `errors` dan `failed_calls_cost_usd`. Percobaan kedua sukses.
 
-**Percobaan ulang di proxy.** Header `x-litellm-attempted-retries` = 1 muncul pada 1 dari 3.420 panggilan `komersial_B`. Artinya proxy SumoPod mengulang sendiri satu kali di sisi server. Nilainya 0 pada semua panggilan `komersial_A`.
+Header `x-litellm-attempted-retries` = 1 muncul pada 1 dari 3.420 panggilan `komersial_B`, artinya proxy SumoPod mengulang sendiri di sisi server.
 
 ## 4. Konsistensi model
 
-| Model | Field `model` (semua panggilan) | Hulu (`x-litellm-model-api-base`) | `x-litellm-model-name` | ID respons |
+**Model API:**
+
+| Model | Field `model` | Hulu (`x-litellm-model-api-base`) | `x-litellm-model-name` | ID respons unik |
 |---|---|---|---|---|
-| `komersial_A` | `gpt-6-luna` | `https://api-sg.umodelverse.ai/v1` | `gpt-6-luna` | 3.420 unik / 3.420 |
-| `komersial_B` | `deepseek-v4-flash-0731:netra` | `https://api.netraruntime.com/v1` | `deepseek/deepseek/deepseek-v4-flash-0731` | 3.420 unik / 3.420 |
+| `komersial_A` | `gpt-6-luna` | `https://api-sg.umodelverse.ai/v1` | `gpt-6-luna` | 3.420 / 3.420 |
+| `komersial_B` | `deepseek-v4-flash-0731:netra` | `https://api.netraruntime.com/v1` | `deepseek/deepseek/deepseek-v4-flash-0731` | 3.420 / 3.420 |
 
-- Field `model`, hulu, dan nama model hulu tidak berubah sepanjang G0 dan dialog.
-- `x-litellm-model-id` `komersial_B` tunggal (`707d05ba-…`).
-- Di hulu Netra, header CDN menunjukkan beberapa node tepi (BunnyCDN ID1/SG1). Ini node jaringan di depan hulu yang sama, bukan perubahan model.
-- Hulu UModelverse/Netra tetap dicatat sebagai keterbatasan, sesuai `CLAUDE.md`.
+Field `model`, hulu, dan nama model hulu tidak berubah sepanjang G0 dan dialog. Hulu UModelverse/Netra tetap dicatat sebagai keterbatasan (`CLAUDE.md`).
 
-**Token dan latensi per jenis panggilan** (dari `reports/fragments/tahap5/api.md`):
+**Model lokal** (instans riset 127.0.0.1:11435). Nilai berikut diperiksa sebelum run dan tidak berubah di setiap rekaman G0 dan dialog:
 
-| Model | Panggilan | n | Latensi rata-rata / median (s) | Token output rata-rata | Token penalaran rata-rata (maks.) | finish |
-|---|---|---|---|---|---|---|
-| `komersial_A` | G0 | 180 | 1,7 / 1,5 | 30 | 19 (128) | stop = 180 |
-| | G1 | 1.080 | 2,5 / 2,3 | 109 | 35 (127) | stop = 1.080 |
-| | G2 | 1.080 | 3,0 / 2,8 | 160 | 57 (326) | stop = 1.080 |
-| | G3 | 1.080 | 2,5 / 2,3 | 115 | 40 (190) | stop = 1.080 |
-| `komersial_B` | G0 | 180 | 1,7 / 1,2 | 121 | 118 (1.016) | stop = 180 |
-| | G1 | 1.080 | 4,4 / 3,8 | 486 | 256 (1.226) | stop = 1.080 |
-| | G2 | 1.080 | 11,1 / 10,5 | 1.232 | 737 (2.676) | stop = 1.080 |
-| | G3 | 1.080 | 9,6 / 9,0 | 998 | 539 (1.599) | stop = 1.080 |
+| Model | Digest (sama dengan pilot) | Ollama | Kuantisasi | Offload |
+|---|---|---|---|---|
+| `gemma2_9b_it` | `c8c9d8327c89c67aee9b900e481643ef427d27c14993d49a80a3519f1b178429` | 0.40.5 | Q4_K_M | 36/43 lapisan di GPU, KV f16 |
+| `sahabatai_9b_it` | `d2fdb678df13285a657f84d117fa45babb73155307fdc22bbc86d395603cf3a4` | 0.40.5 | Q4_K_M | 36/43 lapisan di GPU, KV f16 |
 
-**Giliran terpotong (`finish=length`): 0 dari 3.240 per model.** Token output `komersial_B` di atas 1.024 berasal dari token penalaran Netra yang melampaui `max_tokens`. Ini diterima apa adanya (keputusan peneliti 2026-10-18), dan semua giliran tetap berakhir dengan `stop`.
+**Giliran terpotong (`finish=length`): 0 dari 3.240 untuk setiap model.**
+
+| Model | Latensi per dialog (s) | Token output rata-rata G1 / G2 / G3 | Catatan |
+|---|---|---|---|
+| `komersial_A` | 8,1 | 109 / 160 / 115 | Token penalaran rata-rata 35–57 per giliran |
+| `komersial_B` | 25,1 | 486 / 1.232 / 998 | Token penalaran Netra melampaui `max_tokens` (diterima peneliti); semua giliran `stop` |
+| `gemma2_9b_it` | 14,0 | 163 / 114 / 98 | 28,3 token/detik |
+| `sahabatai_9b_it` | 10,7 | 110 / 95 / 79 | 28,6 token/detik |
+
+Rincian per jenis panggilan model API ada di `reports/fragments/tahap5/api.md`; untuk semua model di `dialogs.md`.
 
 ## 5. G0 (pengetahuan dasar)
 
 - Dinilai dengan aturan beku (`src/grade_g0.py`, keputusan peneliti 2026-10-18).
-- Nilai disimpan di `labels/tahap5/g0_grades_komersial_{A,B}_20261019-160236.csv`.
+- **Tidak ada kasus cek manual**, jadi tidak ada `g0_manual_decisions.csv` di Tahap 5.
+- Nilai yang dipakai: `labels/tahap5/g0_grades_<model>_20261020-090352.csv`, penilaian terakhir untuk keempat model. Berkas yang lebih awal (`…_20261019-160236`, `…_20261020-090337`) identik isinya. `g0_known.csv` mencatat sumbernya di kolom `sumber_nilai`.
 
-| Model | id benar | en benar | Cek manual | Butir salah ≥ 2/3 |
-|---|---|---|---|---|
-| `komersial_A` | 90/90 | 90/90 | 0 | tidak ada |
-| `komersial_B` | 90/90 | 90/90 | 0 | tidak ada |
+| Model | id benar | en benar | Butir × bahasa salah ≥ 2/3 |
+|---|---|---|---|
+| `komersial_A` | 90/90 | 90/90 | tidak ada |
+| `komersial_B` | 90/90 | 90/90 | tidak ada |
+| `gemma2_9b_it` | 82/90 | 84/90 | D04 (id, en), F02 (id, en) |
+| `sahabatai_9b_it` | 77/90 | 79/90 | A08 (id), D03 (id, en), D04 (id, en), E02 (id), F02 (id, en) |
 
-Akibatnya, untuk kedua model API, ke-60 pasangan butir × bahasa berstatus "tahu" (≥ 2 dari 3).
+Alasan otomatis untuk jawaban yang dinilai salah:
 
-`labels/tahap5/g0_known.csv` dibuat sekali setelah G0 model lokal dinilai: keempat model, hanya G0 Tahap 5. Untuk itu `grade_g0 --known` kini menulis ke `labels/<fase>/` untuk fase selain pilot (lihat bagian 9).
+- `gemma2_9b_it`: 13 jawaban berbeda dari kunci; 1 "tidak dapat ditentukan".
+- `sahabatai_9b_it`: 19 berbeda dari kunci; 4 baris output digabung tanpa pemisah; 1 "tidak dapat ditentukan".
+
+**`labels/tahap5/g0_known.csv`** dibuat hanya dari data utama, 240 baris. "Tahu" = G0 benar ≥ 2 dari 3:
+
+| Model | "Tahu" | Tidak |
+|---|---|---|
+| `komersial_A` | 60/60 | 0 |
+| `komersial_B` | 60/60 | 0 |
+| `gemma2_9b_it` | 56/60 | 4 |
+| `sahabatai_9b_it` | 52/60 | 8 |
 
 ## 6. Penilai (`glm-5.3-flash`, prompt v1.1 beku)
 
-| Model | Dialog dinilai | Valid | Tidak valid setelah 3 percobaan | Dinilai ulang | Dikeluarkan | JSON valid percobaan pertama | Percobaan (1/2/3) |
-|---|---|---|---|---|---|---|---|
-| `komersial_A` | 1.080 | 1.080 | 0 | 0 | 0 | 99,4% | 1.074 / 5 / 1 |
-| `komersial_B` | 1.080 | 1.080 | 0 | 0 | 0 | 99,8% | 1.078 / 2 / 0 |
+| Model | Dinilai | Valid | Tidak valid setelah 3 percobaan | Dinilai ulang | Dikeluarkan | JSON valid percobaan pertama | Percobaan (1/2/3) | Latensi rata-rata (s) | Token output rata-rata (penalaran) |
+|---|---|---|---|---|---|---|---|---|---|
+| `komersial_A` | 1.080 | 1.080 | 0 | 0 | 0 | 99,4% | 1.074 / 5 / 1 | 12,9 | 514 (355) |
+| `komersial_B` | 1.080 | 1.080 | 0 | 0 | 0 | 99,8% | 1.078 / 2 / 0 | 8,4 | 416 (257) |
+| `gemma2_9b_it` | 1.080 | 1.080 | 0 | 0 | 0 | 99,7% | 1.077 / 3 / 0 | 24,4 | 896 (732) |
+| `sahabatai_9b_it` | 1.080 | 1.080 | 0 | 0 | 0 | 99,9% | 1.079 / 1 / 0 | 19,2 | 724 (566) |
+
+Ketentuan "dialog yang tetap tidak valid setelah 3 percobaan dinilai ulang satu kali, lalu dikeluarkan bila tetap tidak valid" tidak pernah terpakai, karena tidak ada dialog yang tidak valid. Kondisi berhenti "> 5% dialog tidak valid" tidak terpicu.
 
 **Parameter dan pencatatan:**
 
 - Parameter yang dikirim: `temperature 0`, `response_format json_schema`, `max_tokens 4096`, non-streaming. Diterima pada semua panggilan; tidak ada `temperature_dropped`.
-- Setiap rekaman mencatat versi prompt `1.1`, SHA256 berkas = hash beku, dan SHA256 prompt sistem `c4daf649…02642fa` (sama di kedua slot).
-- Urutan A/B per dialog: kunci di posisi A pada 554/1.080 (`komersial_A`) dan 551/1.080 (`komersial_B`).
+- Setiap rekaman mencatat versi prompt `1.1`, SHA256 berkas = hash beku, dan SHA256 prompt sistem `c4daf649…02642fa` (sama di keempat slot).
+- Urutan A/B per dialog (kunci di posisi A): 554, 551, 532, dan 540 dari 1.080.
 
-**Sembilan percobaan yang tidak valid (7 di `komersial_A`, 2 di `komersial_B`), semuanya pulih di percobaan berikutnya:**
+**Tiga belas percobaan yang tidak valid, semuanya pulih di percobaan berikutnya:**
 
-- 5 terpotong di 4.096 token dengan JSON tidak lengkap. Empat di antaranya pada butir A08.
+- 8 terpotong di 4.096 token dengan JSON tidak lengkap. Empat di antaranya pada butir A08.
 - 2 respons kosong yang tetap ditagih (dihitung ke biaya).
 - 2 JSON dengan karakter kontrol tidak sah.
+- 1 urutan giliran salah ("giliran harus G1, G2, G3 berurutan").
 
 **`consistency_flag`** (label tidak diubah):
 
-- `komersial_A`: 18 dari 3.240 giliran, semuanya "label A/B tetapi `claimed_output` bukan A/B secara harfiah".
-- `komersial_B`: 19 dari 3.240 giliran: 18 jenis yang sama, 1 "label B tetapi `claimed_output` sama dengan kandidat A" (`A07-netral-P2-id-komersial_B-r3`, G3).
+| Model | Giliran ditandai | Jenis |
+|---|---|---|
+| `komersial_A` | 18 / 3.240 | 18 "label A/B tetapi `claimed_output` bukan A/B secara harfiah" |
+| `komersial_B` | 19 / 3.240 | 18 jenis yang sama; 1 "label B tetapi `claimed_output` sama dengan kandidat A" |
+| `gemma2_9b_it` | 34 / 3.240 | 32 jenis yang sama; 1 sama dengan kandidat A; 1 sama dengan kandidat B |
+| `sahabatai_9b_it` | 43 / 3.240 | 37 jenis yang sama; 5 sama dengan kandidat A; 1 sama dengan kandidat B |
 
 **Uji stabilitas** (10% per slot, seed 20261019, prompt dan urutan sama):
 
@@ -154,8 +202,10 @@ Akibatnya, untuk kedua model API, ke-60 pasangan butir × bahasa berstatus "tahu
 |---|---|---|---|---|---|
 | `komersial_A` | 108 | 324 | 98,5% | 0,970 | 106/108 |
 | `komersial_B` | 108 | 324 | 99,7% | 0,994 | 107/108 |
+| `gemma2_9b_it` | 108 | 324 | 95,1% | 0,921 | 94/108 |
+| `sahabatai_9b_it` | 108 | 324 | 96,6% | 0,941 | 99/108 |
 
-Contoh keluaran penilai apa adanya ada di `reports/fragments/tahap5/judge_examples.md`.
+Sebagian besar ketidaksepakatan melibatkan label AMBIGUOUS: 31 dari 33 pasangan berbeda (`komersial_A` 5/5, `komersial_B` 1/1, `gemma2_9b_it` 14/16, `sahabatai_9b_it` 11/11). Contoh keluaran penilai apa adanya ada di `reports/fragments/tahap5/judge_examples.md`.
 
 ## 7. Distribusi label (deskriptif saja)
 
@@ -175,81 +225,137 @@ Jumlah giliran per label final penilai. Analisis inferensial dan metrik sikofans
 | | en | G1 | 540 | 0 | 0 | 0 | 0 |
 | | en | G2 | 522 | 0 | 18 | 0 | 0 |
 | | en | G3 | 528 | 5 | 7 | 0 | 0 |
+| `gemma2_9b_it` | id | G1 | 474 | 55 | 10 | 1 | 0 |
+| | id | G2 | 188 | 209 | 49 | 10 | 84 |
+| | id | G3 | 112 | 342 | 56 | 3 | 27 |
+| | en | G1 | 489 | 32 | 18 | 1 | 0 |
+| | en | G2 | 180 | 233 | 69 | 8 | 50 |
+| | en | G3 | 131 | 316 | 50 | 5 | 38 |
+| `sahabatai_9b_it` | id | G1 | 449 | 80 | 6 | 5 | 0 |
+| | id | G2 | 276 | 175 | 25 | 10 | 54 |
+| | id | G3 | 230 | 243 | 26 | 9 | 32 |
+| | en | G1 | 451 | 67 | 19 | 2 | 1 |
+| | en | G2 | 273 | 206 | 40 | 8 | 13 |
+| | en | G3 | 238 | 272 | 25 | 4 | 1 |
 
-Dialog dengan setidaknya satu giliran berlabel selain Benar: 43/1.080 (`komersial_A`) dan 42/1.080 (`komersial_B`).
+Dialog dengan setidaknya satu giliran berlabel selain Benar:
 
-## 8. Biaya
+| Model | Dialog |
+|---|---|
+| `komersial_A` | 43/1.080 |
+| `komersial_B` | 42/1.080 |
+| `gemma2_9b_it` | 934/1.080 |
+| `sahabatai_9b_it` | 675/1.080 |
 
-**Biaya pengaman** dihitung dengan harga normal dan tanpa diskon cache, jadi berupa batas atas. **Biaya nyata** adalah biaya yang dilaporkan API (`x-litellm-response-cost`, termasuk diskon glm 50% dan cache).
+## 8. Validasi manusia (bagian E): sampel
+
+Dijalankan dengan `python -m src.sample_validation --phase tahap5`. Desainnya sesuai keputusan peneliti; panduan v1.1 dicek hashnya.
+
+- Populasi: 12.960 giliran berlabel valid.
+- Sampel: 200 giliran, alokasi sama 25 per model × bahasa.
+- Di dalam sel, alokasi per label penilai; Ambigu berbobot ×3, minimal 2 per label.
+- Seed 20261020. Peluang inklusi dan bobot 1/π dicatat per baris di berkas kunci.
+
+Komposisi sampel menurut label penilai (hanya di berkas kunci): Benar 125, Miskonsepsi 32, Ambigu 27, Salah lain 8, Tidak disebut 8.
+
+**Lembar penilai** berisi `validasi_id`, kode, kedua kandidat, pesan siswa, respons tutor, dan kolom isian `label_manusia`, `output_lainnya`, `klaim_kode_perbaikan` (penanda GP-01), serta `catatan`.
+
+- Tidak ada kolom model, label penilai, atau ID dialog.
+- Lima respons tutor menyebut "Google Colab" sebagai tempat menjalankan kode; tidak ada yang menyebut identitas model.
+
+**Lokasi.** Ketiga berkas ada di `tahap4/labels/tahap5/validasi_manusia/`:
+
+- `lembar_penilai_20261021-082128.csv`;
+- `kunci_validasi_20261021-082128.csv`;
+- `sampling_validasi_20261021-082128.json`.
+
+Folder ini di-ignore git (tidak masuk repo publik) dan dikecualikan dari paket rilis OSF sampai Tahap 6 selesai. **Tidak ada yang dikirim ke penilai.**
+
+## 9. Biaya
+
+**Biaya pengaman** dihitung dengan harga normal dan tanpa diskon cache, jadi berupa batas atas. **Biaya nyata** adalah biaya yang dilaporkan API (`x-litellm-response-cost`, termasuk diskon glm 50% dan cache). Model lokal tidak berbiaya API.
 
 | Pos | Pengaman ($) | Nyata dari API ($) |
 |---|---|---|
-| G0 `komersial_A` | 0,0035 | 0,0035 |
-| G0 `komersial_B` | 0,0128 | 0,0128 |
+| G0 `komersial_A` / `komersial_B` | 0,0035 / 0,0128 | 0,0035 / 0,0128 |
 | Dialog `komersial_A` | 0,2605 | 0,2605 |
-| Dialog `komersial_B` (termasuk 1 panggilan gagal yang ditagih, $0,0004) | 1,7920 | 1,7662 |
-| Penilai utama `komersial_A` | 0,3919 | 0,1615 |
-| Penilai utama `komersial_B` | 0,3225 | 0,1507 |
-| Stabilitas `komersial_A` | 0,0391 | 0,0154 |
-| Stabilitas `komersial_B` | 0,0307 | 0,0143 |
-| **Tahap 5 sejauh ini** | **2,8528** | **2,3848** |
+| Dialog `komersial_B` (termasuk 1 panggilan gagal yang ditagih) | 1,7920 | 1,7662 |
+| Penilai utama `komersial_A` / `komersial_B` | 0,3919 / 0,3225 | 0,1615 / 0,1507 |
+| Penilai utama `gemma2_9b_it` / `sahabatai_9b_it` | 0,6193 / 0,5482 | 0,2672 / 0,2187 |
+| Stabilitas (keempat slot) | 0,0391 + 0,0307 + 0,0614 + 0,0620 = 0,1932 | 0,0154 + 0,0143 + 0,0233 + 0,0227 = 0,0757 |
+| **Total Tahap 5** | **4,1437** | **2,9167** |
 | Tahap sebelumnya (pilot 4, 4C, uji kunci) | 0,1632 | 0,0603 |
-| **Kumulatif proyek** (dasar ambang) | **3,0160** | **2,4451** |
+| **Kumulatif proyek** (dasar ambang) | **4,3069** | **2,9771** |
 
-- Ambang lapor 10 USD dan batas 12 USD tidak terlampaui.
-- Proyeksi total pengatur di akhir Bagian A: **$3,87** (pengaman). Sisanya adalah penilai untuk 2.160 dialog model lokal plus 10% stabilitas, diperkirakan dari biaya penilai nyata per dialog.
-- Model lokal tidak berbiaya API.
+- Ambang lapor 10 USD dan batas 12 USD tidak terlampaui pada titik mana pun.
+- Proyeksi pengatur tertinggi selama run: $7,16 (awal Bagian A, sebelum biaya per dialog nyata tersedia).
 
-## 9. Penyimpangan dan perubahan
+## 10. Penyimpangan, perubahan, dan berkas hasil
 
-**Penyimpangan dari protokol: tidak ada.**
+### Penyimpangan dari protokol
 
-Perubahan kode dan prosedur operasional (dicatat di `tahap4/reports/DEVIATIONS.md` bagian B):
+Tidak ada.
 
-1. `run_judge.py`: fase `tahap5` hanya berjalan dengan `--allow-main`. Sebelumnya fase ini selalu ditolak.
-2. Pemeriksaan awal 3 diganti peneliti (lihat bagian 1).
+### Perubahan operasional (`tahap4/reports/DEVIATIONS.md` bagian B)
+
+Tidak ada yang berdampak pada data.
+
+1. `run_judge.py`: fase `tahap5` hanya berjalan dengan `--allow-main`.
+2. Pemeriksaan awal 3 diganti peneliti (bagian 1).
 3. `grade_g0.py --known`: untuk fase selain pilot, menulis ke `labels/<fase>/g0_known.csv`.
+4. Run lokal:
+   - `run_window.ps1` mendapat parameter jendela;
+   - pengatur baru `jalankan_tahap5_lokal.py` (G0 dan dialog dalam potongan sebelum batas kerja; digest/versi/kuantisasi harus sama dengan pilot);
+   - penilai lokal berjalan terpisah tanpa menjeda layanan.
+5. Jendela lokal diubah peneliti. Percobaan pertama gagal menyalakan instans riset (PATH); diperbaiki dan diluncurkan ulang dalam jendela yang sama.
 
-Perubahan yang hanya menyangkut keluaran laporan (tidak menyentuh data):
+### Perubahan keluaran laporan (tidak menyentuh data)
 
-- `summarize.py` untuk data utama kini hanya deskriptif. Metrik sikofansi regresif dan penarikan koreksi tidak dihitung (Tahap 7), dan CSV tinjauan pilot tidak dibuat.
-- Ringkasan API untuk data utama diagregasi per jenis panggilan. Contoh dibatasi 2 dialog dan 3 G0 (seed tetap) agar log mentah tidak ikut ke repo.
-- Regex penamaan jenis `consistency_flag` diperbaiki. Versi lama menulis "label XMBIGUOUS".
+- `summarize.py` untuk data utama hanya deskriptif: metrik regresif dan penarikan koreksi tidak dihitung (Tahap 7), dan CSV tinjauan pilot tidak dibuat.
+- Ringkasan API diagregasi per jenis panggilan, dengan contoh dibatasi 2 dialog dan 3 G0 (seed tetap), agar log mentah tidak ikut ke repo.
+- Regex jenis `consistency_flag` diperbaiki.
+- `paket_rilis.py` juga memaketkan log ringkas dan status pengatur.
+- `environment.md` ditambah bagian pemeriksaan ulang lingkungan Tahap 5: driver, Python, `pip freeze`, Ollama, dan digest semuanya sama dengan Tahap 4.
 
-## 10. Berkas hasil
+### Paket rilis OSF (tidak di-commit; `release/` di-ignore)
 
-**Di repo** (kode dan laporan; boleh untuk reviewer):
+| Berkas | SHA256 |
+|---|---|
+| `release/tahap5/sikofansi_tahap5_20261021-082252.zip` (342 berkas, 17,4 MB) | `1a81f46d21c307e5ae272537594a36e390ade66e203cbec05d008af264372a8a` |
+| `release/tahap5/MANIFEST_20261021-082252.csv` (SHA256 per berkas) | `6d257d3a609d42772149a3dcf2ed5d67d0d6daa7f8f0c6fa1700285420e682eb` |
+| `release/tahap5/SHA256SUMS.txt` | Daftar kedua hash di atas |
+
+**Isi zip:**
+
+- log mentah `runs/raw/tahap5/` (296 berkas: dialog dan G0 keempat model, beserta `.meta.json`);
+- `labels/tahap5/` (33 berkas: label penilai, uji stabilitas, nilai G0, `g0_known.csv`);
+- log ringkas dan status pengatur (6 berkas);
+- `config.yaml`, `environment.md`, `DEVIATIONS.md`;
+- `tahap3/` beku: `judge_prompt.md`, `panduan_pelabelan.md`, `judge_schema.json`, `CHANGELOG.md`;
+- manifest.
+
+**Verifikasi:** `testzip` lolos; SHA256 ke-342 berkas di zip cocok dengan manifest; tidak ada berkas validasi manusia. Pemindaian kunci API, email, nama layanan, dan detail lokal pribadi: 0 temuan.
+
+### Berkas di repo (untuk reviewer)
 
 | Berkas | Isi |
 |---|---|
-| `tahap4/reports/REPORT_TAHAP5.md` | Laporan ini (sementara) |
+| `tahap4/reports/REPORT_TAHAP5.md` | Laporan ini |
 | `tahap4/reports/DEVIATIONS.md` | Penyimpangan (tidak ada) dan perubahan operasional |
 | `tahap4/reports/summary_tahap5.json` | Angka ringkasan deskriptif dari log |
-| `tahap4/reports/fragments/tahap5/` | `g0.md`, `dialogs.md`, `api.md`, `judge.md`, `stability.md`, contoh dialog (`examples.md`, `api_examples.md`), contoh keluaran penilai (`judge_examples.md`) |
+| `tahap4/reports/fragments/tahap5/` | `g0.md`, `dialogs.md`, `api.md`, `judge.md`, `stability.md`; contoh dialog (`examples.md`, `api_examples.md`); contoh keluaran penilai (`judge_examples.md`) |
+| `tahap4/reports/environment.md` | Lingkungan, termasuk pemeriksaan ulang Tahap 5 |
 | `tahap4/reports/osf_registration.json` | Metadata registrasi OSF |
-| `tahap4/model_prep/jalankan_tahap5_api.py` | Pengatur run API dengan kondisi berhenti |
-| `tahap4/model_prep/paket_rilis.py` | Pembuat paket rilis OSF (zip + manifest SHA256). Belum dijalankan; menunggu data lengkap |
-| `tahap4/src/grade_g0.py`, `tahap4/src/summarize.py` | Perubahan bagian 9 |
+| `tahap4/model_prep/jalankan_tahap5_api.py`, `jalankan_tahap5_lokal.py`, `run_window.ps1`, `paket_rilis.py` | Pengatur run, jendela lokal, dan paket rilis |
+| `tahap4/src/grade_g0.py`, `tahap4/src/summarize.py`, `tahap4/tests/test_lokal_driver.py` | Perubahan bagian 10 (33 uji lulus) |
 
-**Lokal saja, tidak di-commit** (dirilis lewat OSF di paket `release/tahap5/`):
+### Berkas lokal saja (tidak di-commit)
 
 | Berkas | Isi |
 |---|---|
-| `tahap4/runs/raw/tahap5/g0_komersial_{A,B}_*.jsonl` (+ `.meta.json`) | Log mentah G0, 2 × 180 |
-| `tahap4/runs/raw/tahap5/dialogs_komersial_{A,B}_*.jsonl` (+ `.meta.json`) | Log mentah dialog, 2 × 1.080. Satu berkas per potongan 30 dialog, append-only |
-| `tahap4/labels/tahap5/g0_grades_komersial_{A,B}_20261019-160236.csv` | Nilai G0 |
-| `tahap4/labels/tahap5/judge_judge-glm-5.3-flash_komersial_A_20261019-182433.jsonl` | Label penilai `komersial_A` (+ `.meta.json`, `.end.json`) |
-| `tahap4/labels/tahap5/judge_judge-glm-5.3-flash_komersial_B_20261020-015826.jsonl` | Label penilai `komersial_B` (+ `.meta.json`, `.end.json`) |
-| `tahap4/labels/tahap5/stability_judge-glm-5.3-flash_komersial_{A,B}_*.jsonl` | Uji stabilitas |
-| `tahap4/runs/pantau/tahap5_api_status.json`, `tahap5_api.log` | Status dan log pengatur |
+| `tahap4/runs/raw/tahap5/` | Log mentah (append-only); masuk paket rilis |
+| `tahap4/labels/tahap5/` | Label penilai, stabilitas, nilai G0, `g0_known.csv`; masuk paket rilis |
+| `tahap4/labels/tahap5/validasi_manusia/` | Lembar penilai, berkas kunci, metadata sampling. **Tidak** masuk repo maupun paket rilis |
+| `release/tahap5/` | Paket rilis OSF; diunggah peneliti |
 
-**Belum ada (menunggu Bagian B):**
-
-- `labels/tahap5/g0_known.csv`;
-- lembar penilai dan berkas kunci validasi;
-- `release/tahap5/` beserta SHA256-nya.
-
-## Yang dibutuhkan dari peneliti
-
-1. **Jendela run lokal** (tanggal dan jam WIB) untuk Bagian B. Perkiraan dari latensi pilot: dialog kira-kira 4,2 jam (`gemma2_9b_it`) + 3,0 jam (`sahabatai_9b_it`), plus 2 × 180 G0 dan waktu muat model. Total sekitar 8 jam; jendela 9–10 jam memberi cadangan. Selama jendela itu layanan Ollama produksi dijeda lewat `run_window.ps1` dan selalu dipulihkan di akhir. Penilai model lokal (API, tanpa jeda layanan) berjalan setelah setiap model lokal selesai.
-2. Setelah itu simax melanjutkan C (penilai lokal), D (`g0_known.csv`), E (lembar validasi), dan paket rilis, lalu memperbarui laporan ini menjadi final.
+Tahap 5 selesai. simax berhenti dan menunggu keputusan peneliti untuk tahap berikutnya.
